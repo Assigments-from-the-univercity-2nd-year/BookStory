@@ -9,5 +9,31 @@
         android:id="@+id/bookListFragment"
         android:name="com.example.bookstory.BookListFragment"
         android:label="fragment_book_list"
-        tools:layout="@layout/fragment_book_list" />
+        tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/action_bookListFragment_to_addBookFragment"
+            app:destination="@id/addBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBookFragment"
+        android:name="com.example.bookstory.AddBookFragment"
+        android:label="fragment_add_book"
+        tools:layout="@layout/fragment_add_book" >
+        <action
+            android:id="@+id/action_addBookFragment_to_addAuthorFragment"
+            app:destination="@id/addAuthorFragment" />
+        <action
+            android:id="@+id/action_addBookFragment_to_addCharacterFragment"
+            app:destination="@id/addCharacterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAuthorFragment"
+        android:name="com.example.bookstory.AddAuthorFragment"
+        android:label="fragment_add_author"
+        tools:layout="@layout/fragment_add_author" />
+    <fragment
+        android:id="@+id/addCharacterFragment"
+        android:name="com.example.bookstory.AddCharacterFragment"
+        android:label="fragment_add_character"
+        tools:layout="@layout/fragment_add_character" />
 </navigation>
