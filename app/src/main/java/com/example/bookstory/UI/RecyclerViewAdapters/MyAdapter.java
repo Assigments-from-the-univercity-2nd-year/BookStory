@@ -7,14 +7,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookstory.DAO.Book;
+
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
+    List<Book> books;
 
-    public MyAdapter(Context context) {
+    public MyAdapter(Context context, List<Book> books) {
         this.context = context;
+        this.books = books;
     }
 
     @NonNull

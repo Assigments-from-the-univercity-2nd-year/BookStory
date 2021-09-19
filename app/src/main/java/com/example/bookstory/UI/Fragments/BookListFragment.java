@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bookstory.R;
+import com.example.bookstory.UI.RecyclerViewAdapters.MyAdapter;
+
+import java.util.ArrayList;
 
 public class BookListFragment extends Fragment {
 
@@ -18,6 +21,7 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        MyAdapter myAdapter = new MyAdapter(root.getContext(), new ArrayList<>());//TODO replase this ArrayList with real values
         return root;
     }
 }
