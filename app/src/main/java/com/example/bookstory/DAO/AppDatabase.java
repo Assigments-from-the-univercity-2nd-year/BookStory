@@ -13,7 +13,8 @@ import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCr
                 BookAuthorCrossRef.class,
                 BookCharacterCrossRef.class
         },
-        version = 1)
+        version = 1,
+        exportSchema = false)
 public abstract class AppDatabase implements DomainDAO {
-        public abstract DomainDAO domainDAO();
+    public abstract DomainDAO domainDAO();
 }
