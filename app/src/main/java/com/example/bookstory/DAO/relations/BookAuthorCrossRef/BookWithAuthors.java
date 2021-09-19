@@ -1,4 +1,4 @@
-package com.example.bookstory.DAO.relations;
+package com.example.bookstory.DAO.relations.BookAuthorCrossRef;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
