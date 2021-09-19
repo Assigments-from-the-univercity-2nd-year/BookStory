@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Author {
     @PrimaryKey
-    String authorName;
+    public String authorName;
 }

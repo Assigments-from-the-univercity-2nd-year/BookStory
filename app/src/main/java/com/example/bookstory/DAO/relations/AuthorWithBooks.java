@@ -13,12 +13,12 @@ import java.util.List;
 @Entity
 public class AuthorWithBooks {
     @Embedded
-    Author author;
+    public Author author;
 
     @Relation(
             parentColumn = "authorName",
             entityColumn = "bookId",
             associateBy = @Junction(BookAuthorCrossRef.class)
     )
-    List<Book> books;
+    public List<Book> books;
 }

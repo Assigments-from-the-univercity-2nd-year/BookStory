@@ -4,6 +4,6 @@ import androidx.room.Entity;
 
 @Entity(primaryKeys = {"bookId", "authorName"})
 public class BookAuthorCrossRef {
-    int bookId;
-    String authorName;
+    public int bookId;
+    public String authorName;
 }

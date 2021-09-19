@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Character {
     @PrimaryKey
-    String characterName;
+    public String characterName;
 
-    Set<String> pseudonyms;
+    public Set<String> pseudonyms;
 }

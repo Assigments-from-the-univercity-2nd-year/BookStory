@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Book {
     @PrimaryKey(autoGenerate = true)
-    int bookId;
+    public int bookId;
 
-    String bookName;
-    int numberOfPages;
-    int yearOfPublication;
-    String annotation;
+    public String bookName;
+    public int numberOfPages;
+    public int yearOfPublication;
+    public String annotation;
 }
