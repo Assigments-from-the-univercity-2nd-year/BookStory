@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Author {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     public String authorName;
 }

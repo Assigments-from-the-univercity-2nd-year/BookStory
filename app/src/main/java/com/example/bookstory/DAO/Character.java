@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Character {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     public String characterName;
 
     public Set<String> pseudonyms;
