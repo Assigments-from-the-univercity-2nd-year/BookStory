@@ -1,4 +1,4 @@
-package com.example.bookstory.UI;
+package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.bookstory.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddBookFragment#newInstance} factory method to
+ * Use the {@link AddAuthorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddBookFragment extends Fragment {
+public class AddAuthorFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class AddBookFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddBookFragment() {
+    public AddAuthorFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class AddBookFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddBookFragment.
+     * @return A new instance of fragment AddAuthorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddBookFragment newInstance(String param1, String param2) {
-        AddBookFragment fragment = new AddBookFragment();
+    public static AddAuthorFragment newInstance(String param1, String param2) {
+        AddAuthorFragment fragment = new AddAuthorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class AddBookFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_book, container, false);
+        return inflater.inflate(R.layout.fragment_add_author, container, false);
     }
 }

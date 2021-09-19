@@ -1,4 +1,4 @@
-package com.example.bookstory.UI;
+package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.bookstory.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddCharacterFragment#newInstance} factory method to
+ * Use the {@link AddBookFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddCharacterFragment extends Fragment {
+public class AddBookFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class AddCharacterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddCharacterFragment() {
+    public AddBookFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class AddCharacterFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddCharacterFragment.
+     * @return A new instance of fragment AddBookFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddCharacterFragment newInstance(String param1, String param2) {
-        AddCharacterFragment fragment = new AddCharacterFragment();
+    public static AddBookFragment newInstance(String param1, String param2) {
+        AddBookFragment fragment = new AddBookFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class AddCharacterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_character, container, false);
+        return inflater.inflate(R.layout.fragment_add_book, container, false);
     }
 }
