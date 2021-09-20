@@ -11,7 +11,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.Fragments.BookListFragmentDirections;
@@ -42,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         BookWithAuthors currentBook = BooksWithAuthors.get(position);
         holder.bookNameTv.setText(currentBook.book.bookName);
         holder.bookWithAuthors = currentBook;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(currentBook.authors.get(0).authorName);
         if (currentBook.authors.size() > 1) {
             sb.append(" and ").append(currentBook.authors.size() - 1).append(" more");
@@ -66,17 +65,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             bookNameTv = itemView.findViewById(R.id.bookName);
             authorNameTv = itemView.findViewById(R.id.authorName);
             yearOfPublishingTv = itemView.findViewById(R.id.yearOfPublishing);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavController navController = Navigation.findNavController(v);
+            itemView.setOnClickListener(v -> {
+                NavController navController = Navigation.findNavController(v);
 
-                    BookListFragmentDirections.ActionBookListFragmentToBookDescriptionFragment actionNav =
-                            BookListFragmentDirections.actionBookListFragmentToBookDescriptionFragment(
-                                    bookWithAuthors.book
-                            );
-                    navController.navigate(actionNav);
-                }
+                BookListFragmentDirections.ActionBookListFragmentToBookDescriptionFragment actionNav =
+                        BookListFragmentDirections.actionBookListFragmentToBookDescriptionFragment(
+                                bookWithAuthors.book
+                        );
+                navController.navigate(actionNav);
             });
         }
     }

@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_add_character" />
     <fragment
         android:id="@+id/bookDescriptionFragment"
-        android:name="com.example.bookstory.BookDescriptionFragment"
+        android:name="com.example.bookstory.UI.Fragments.BookDescriptionFragment"
         android:label="fragment_book_description"
         tools:layout="@layout/fragment_book_description" >
         <argument
