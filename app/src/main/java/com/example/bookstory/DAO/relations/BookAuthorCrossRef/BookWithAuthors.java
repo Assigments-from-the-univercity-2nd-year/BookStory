@@ -21,4 +21,9 @@ public class BookWithAuthors {
             associateBy = @Junction(BookAuthorCrossRef.class)
     )
     public List<Author> authors;
+
+    public BookWithAuthors(Book book, List<Author> authors) {
+        this.book = book;
+        this.authors = authors;
+    }
 }

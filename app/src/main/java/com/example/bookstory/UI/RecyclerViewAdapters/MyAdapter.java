@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DAO.Book;
+import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.R;
 
 import java.util.List;
@@ -17,32 +18,38 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
-    List<Book> books;
+    List<BookWithAuthors> BooksWithAuthors;
 
-    public MyAdapter(Context context, List<Book> books) {
+    public MyAdapter(Context context, List<BookWithAuthors> books) {
         this.context = context;
-        this.books = books;
+        this.BooksWithAuthors = books;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.book_row, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(
+                layoutInflater.inflate(R.layout.book_row, parent, false)
+        );
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Book currentBook = books.get(position);
-        holder.bookNameTv.setText(currentBook.bookName);
-        //holder.authorNameTv.setText("");
-        holder.yearOfPublishingTv.setText(String.valueOf(currentBook.yearOfPublication));
+        BookWithAuthors currentBook = BooksWithAuthors.get(position);
+        holder.bookNameTv.setText(currentBook.book.bookName);
+        StringBuffer sb = new StringBuffer();
+        sb.append(currentBook.authors.get(0).authorName);
+        if (currentBook.authors.size() > 1) {
+            sb.append(" and ").append(currentBook.authors.size() - 1).append(" more");
+        }
+        holder.authorNameTv.setText(sb.toString());
+        holder.yearOfPublishingTv.setText(String.valueOf(currentBook.book.yearOfPublication));
     }
 
     @Override
     public int getItemCount() {
-        return books.size();
+        return BooksWithAuthors.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

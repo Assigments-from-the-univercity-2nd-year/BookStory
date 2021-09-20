@@ -9,4 +9,8 @@ public class Author {
     @NonNull
     @PrimaryKey(autoGenerate = false)
     public String authorName;
+
+    public Author(@NonNull String authorName) {
+        this.authorName = authorName;
+    }
 }
