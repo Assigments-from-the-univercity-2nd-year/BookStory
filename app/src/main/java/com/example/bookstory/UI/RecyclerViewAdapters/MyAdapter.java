@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +11,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.R;
-import com.example.bookstory.UI.Fragments.BookListFragment;
 import com.example.bookstory.UI.Fragments.BookListFragmentDirections;
 
 import java.util.List;
@@ -51,7 +48,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
         holder.authorNameTv.setText(sb.toString());
         holder.yearOfPublishingTv.setText(String.valueOf(currentBook.book.yearOfPublication));
-
     }
 
     @Override
@@ -70,17 +66,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             bookNameTv = itemView.findViewById(R.id.bookName);
             authorNameTv = itemView.findViewById(R.id.authorName);
             yearOfPublishingTv = itemView.findViewById(R.id.yearOfPublishing);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            NavController navController = Navigation.findNavController(v);
+            /*NavController navController = Navigation.findNavController(v);
 
             BookListFragmentDirections.ActionBookListFragmentToBookDescriptionFragment actionNav =
                     BookListFragmentDirections.actionBookListFragmentToBookDescriptionFragment(
                             bookWithAuthors.book
                     );
-            navController.navigate(actionNav);
+            navController.navigate(actionNav);*/
         }
     }
 }
