@@ -28,9 +28,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        return new MyViewHolder(
-                layoutInflater.inflate(R.layout.book_row, parent, false)
-        );
+        View view = layoutInflater.inflate(R.layout.book_row, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -38,12 +37,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Book currentBook = books.get(position);
         holder.bookNameTv.setText(currentBook.bookName);
         //holder.authorNameTv.setText("");
-        holder.yearOfPublishingTv.setText(currentBook.yearOfPublication);
+        holder.yearOfPublishingTv.setText(String.valueOf(currentBook.yearOfPublication));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return books.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
