@@ -16,7 +16,7 @@ import com.example.bookstory.R;
 
 public class BookDescriptionFragment extends Fragment {
 
-    BookDescriptionFragmentArgs args;
+    //BookDescriptionFragmentArgs args;
     View root;
 
     @Override
