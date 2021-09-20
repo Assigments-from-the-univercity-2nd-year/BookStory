@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_addBookFragment_to_addCharacterFragment"
             app:destination="@id/addCharacterFragment" />
+        <argument
+            android:name="book"
+            app:argType="com.example.bookstory.DAO.Book" />
     </fragment>
     <fragment
         android:id="@+id/addAuthorFragment"
