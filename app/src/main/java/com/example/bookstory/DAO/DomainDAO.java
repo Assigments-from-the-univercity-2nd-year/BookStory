@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
@@ -44,6 +45,21 @@ public interface DomainDAO {
 
     @Delete
     void deleteBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRefs);
+
+    @Update
+    void updateAuthor(Author author);
+
+    @Update
+    void updateBook(Book book);
+
+    @Update
+    void updateCharacter(Character character);
+
+    @Update
+    void updateBookAuthorCrossRef(BookAuthorCrossRef bookAuthorCrossRef);
+
+    @Update
+    void updateBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRefs);
 
     @Transaction
     @Query("SELECT * FROM book")
