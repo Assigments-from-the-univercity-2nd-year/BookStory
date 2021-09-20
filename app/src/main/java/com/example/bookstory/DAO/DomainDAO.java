@@ -1,6 +1,7 @@
 package com.example.bookstory.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -28,6 +29,21 @@ public interface DomainDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertBookCharacterCrossRef(BookCharacterCrossRef... bookCharacterCrossRefs);
+
+    @Delete
+    void deleteAuthor(Author author);
+
+    @Delete
+    void deleteBook(Book book);
+
+    @Delete
+    void deleteCharacter(Character character);
+
+    @Delete
+    void deleteBookAuthorCrossRef(BookAuthorCrossRef bookAuthorCrossRef);
+
+    @Delete
+    void deleteBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRefs);
 
     @Transaction
     @Query("SELECT * FROM book")
