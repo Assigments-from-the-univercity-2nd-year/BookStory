@@ -76,8 +76,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public void onClick(View v) {
             NavController navController = Navigation.findNavController(v);
 
-            BookListFragmentDirections.ActionBookListFragmentToAddBookFragment actionNav =
-                    BookListFragmentDirections.actionBookListFragmentToAddBookFragment(
+            BookListFragmentDirections.ActionBookListFragmentToBookDescriptionFragment actionNav =
+                    BookListFragmentDirections.actionBookListFragmentToBookDescriptionFragment(
                             bookWithAuthors.book
                     );
             navController.navigate(actionNav);
