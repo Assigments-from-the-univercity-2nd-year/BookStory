@@ -3,7 +3,6 @@ package com.example.bookstory.DAO;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Keep;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -23,6 +22,7 @@ public class Book implements Parcelable {
         this.yearOfPublication = yearOfPublication;
         this.annotation = annotation;
     }
+
 
     protected Book(Parcel in) {
         bookId = in.readInt();

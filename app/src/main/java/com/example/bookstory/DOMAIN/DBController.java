@@ -2,9 +2,6 @@ package com.example.bookstory.DOMAIN;
 
 import android.content.Context;
 
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-
 import com.example.bookstory.DAO.AppDatabase;
 import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DAO.Book;
