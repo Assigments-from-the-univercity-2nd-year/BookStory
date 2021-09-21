@@ -24,6 +24,7 @@ public class Book implements Parcelable {
         this.annotation = annotation;
     }
 
+
     protected Book(Parcel in) {
         bookId = in.readInt();
         bookName = in.readString();

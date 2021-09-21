@@ -11,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.Fragments.BookListFragmentDirections;
@@ -41,13 +42,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         BookWithAuthors currentBook = BooksWithAuthors.get(position);
         holder.bookNameTv.setText(currentBook.book.bookName);
         holder.bookWithAuthors = currentBook;
-        StringBuilder sb = new StringBuilder();
-        sb.append(currentBook.authors.get(0).authorName);
-        if (currentBook.authors.size() > 1) {
-            sb.append(" and ").append(currentBook.authors.size() - 1).append(" more");
-        }
-        holder.authorNameTv.setText(sb.toString());
+        holder.authorNameTv.setText(getAuthorsDescriptionOfBook(currentBook.authors));
         holder.yearOfPublishingTv.setText(String.valueOf(currentBook.book.yearOfPublication));
+    }
+
+    String getAuthorsDescriptionOfBook(List<Author> authors) {
+        StringBuilder sb = new StringBuilder();
+        if (authors.isEmpty()) {
+            sb.append("Author not specified");
+        } else {
+            sb.append(authors.get(0).authorName);
+            if (authors.size() > 1) {
+                sb.append(" and ").append(authors.size() - 1).append(" more");
+            }
+        }
+        return sb.toString();
     }
 
     @Override
