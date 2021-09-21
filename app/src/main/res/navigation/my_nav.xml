@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/bookListFragment">
+
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="com.example.bookstory.UI.Fragments.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/action_bookListFragment_to_addBookFragment"
+            app:destination="@id/addBookFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_bookDescriptionFragment"
+            app:destination="@id/bookDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBookFragment"
+        android:name="com.example.bookstory.UI.Fragments.AddBookFragment"
+        android:label="fragment_add_book"
+        tools:layout="@layout/fragment_add_book" >
+        <action
+            android:id="@+id/action_addBookFragment_to_addAuthorFragment"
+            app:destination="@id/addAuthorFragment" />
+        <action
+            android:id="@+id/action_addBookFragment_to_addCharacterFragment"
+            app:destination="@id/addCharacterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAuthorFragment"
+        android:name="com.example.bookstory.UI.Fragments.AddAuthorFragment"
+        android:label="fragment_add_author"
+        tools:layout="@layout/fragment_add_author" />
+    <fragment
+        android:id="@+id/addCharacterFragment"
+        android:name="com.example.bookstory.UI.Fragments.AddCharacterFragment"
+        android:label="fragment_add_character"
+        tools:layout="@layout/fragment_add_character" />
+    <fragment
+        android:id="@+id/bookDescriptionFragment"
+        android:name="com.example.bookstory.UI.Fragments.BookDescriptionFragment"
+        android:label="fragment_book_description"
+        tools:layout="@layout/fragment_book_description" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookstory.DAO.Book" />
+    </fragment>
+</navigation>
