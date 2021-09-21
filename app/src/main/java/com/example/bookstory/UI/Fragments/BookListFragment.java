@@ -1,25 +1,17 @@
 package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.bookstory.DAO.Author;
-import com.example.bookstory.DAO.Book;
-import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
-import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.RecyclerViewAdapters.MyAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookListFragment extends Fragment {
 

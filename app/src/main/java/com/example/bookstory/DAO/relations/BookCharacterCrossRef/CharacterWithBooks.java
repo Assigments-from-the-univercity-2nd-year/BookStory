@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
-import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.Character;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
