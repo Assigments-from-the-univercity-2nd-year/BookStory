@@ -22,8 +22,8 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
-        FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton);
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView_bookList);
+        FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
         floatingActionButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
             BookListFragmentDirections.ActionBookListFragmentToAddBookFragment action =
