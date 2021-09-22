@@ -32,11 +32,11 @@ public class BookDescriptionFragment extends Fragment {
 
         args = BookDescriptionFragmentArgs.fromBundle(getArguments());
 
-        TextView bookName = root.findViewById(R.id.book_description_book_nameTv);
+        TextView bookName = root.findViewById(R.id.textView_bookDescription_bookName);
         //TODO: get authors
         TextView bookAuthor = root.findViewById(R.id.authorName);
-        TextView bookYearOfPublication = root.findViewById(R.id.yearOfPublicationTv);
-        TextView bookNumberOfPages = root.findViewById(R.id.numberOfPagesTv);
+        TextView bookYearOfPublication = root.findViewById(R.id.textView_bookDescription_yearOfPublication);
+        TextView bookNumberOfPages = root.findViewById(R.id.textView_bookDescription_numberOfPages);
 
         bookName.setText(args.getBook().bookName);
         bookYearOfPublication.setText(String.valueOf(args.getBook().yearOfPublication));
