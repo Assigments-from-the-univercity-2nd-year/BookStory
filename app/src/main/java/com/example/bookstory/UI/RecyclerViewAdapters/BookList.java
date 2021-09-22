@@ -49,11 +49,11 @@ public class BookList extends RecyclerView.Adapter<BookList.BookRowHolder> {
     String getAuthorsDescriptionOfBook(List<Author> authors) {
         StringBuilder sb = new StringBuilder();
         if (authors.isEmpty()) {
-            sb.append("Author not specified");
+            sb.append("Автор не указан");
         } else {
             sb.append(authors.get(0).authorName);
             if (authors.size() > 1) {
-                sb.append(" and ").append(authors.size() - 1).append(" more");
+                sb.append(" и ещё ").append(authors.size() - 1);
             }
         }
         return sb.toString();

@@ -6,4 +6,6 @@
     <string name="all_author">Автор:</string>
     <string name="all_yearOfPublication">Год издания:</string>
     <string name="all_numberOfPages">Количество страниц:</string>
+
+    <string name="bookDescription_noCharacters">Нет отмеченых пероснажей.</string>
 </resources>
