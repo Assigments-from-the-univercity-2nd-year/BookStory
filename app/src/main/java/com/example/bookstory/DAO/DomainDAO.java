@@ -11,6 +11,7 @@ import androidx.room.Update;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
 
 import java.util.List;
 
@@ -75,5 +76,5 @@ public interface DomainDAO {
 
     @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
-    BookWithAuthors getBookWithCharacter(int bookId);
+    BookWithCharacters getBookWithCharacter(int bookId);
 }

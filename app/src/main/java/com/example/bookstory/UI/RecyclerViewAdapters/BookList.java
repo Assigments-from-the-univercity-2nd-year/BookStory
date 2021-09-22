@@ -18,32 +18,32 @@ import com.example.bookstory.UI.Fragments.BookListFragmentDirections;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class BookList extends RecyclerView.Adapter<BookList.BookRowHolder> {
 
     Context context;
     List<BookWithAuthors> BooksWithAuthors;
 
-    public MyAdapter(Context context, List<BookWithAuthors> books) {
+    public BookList(Context context, List<BookWithAuthors> books) {
         this.context = context;
         this.BooksWithAuthors = books;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        return new MyViewHolder(
+        return new BookRowHolder(
                 layoutInflater.inflate(R.layout.book_row, parent, false)
         );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        BookWithAuthors currentBook = BooksWithAuthors.get(position);
-        holder.bookNameTv.setText(currentBook.book.bookName);
-        holder.bookWithAuthors = currentBook;
-        holder.authorNameTv.setText(getAuthorsDescriptionOfBook(currentBook.authors));
-        holder.yearOfPublishingTv.setText(String.valueOf(currentBook.book.yearOfPublication));
+    public void onBindViewHolder(@NonNull BookRowHolder holder, int position) {
+        BookWithAuthors currentBookWithAuthors = BooksWithAuthors.get(position);
+        holder.bookNameTv.setText(currentBookWithAuthors.book.bookName);
+        holder.bookWithAuthors = currentBookWithAuthors;
+        holder.authorNameTv.setText(getAuthorsDescriptionOfBook(currentBookWithAuthors.authors));
+        holder.yearOfPublishingTv.setText(String.valueOf(currentBookWithAuthors.book.yearOfPublication));
     }
 
     String getAuthorsDescriptionOfBook(List<Author> authors) {
@@ -64,12 +64,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return BooksWithAuthors.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class BookRowHolder extends RecyclerView.ViewHolder {
 
         TextView bookNameTv, authorNameTv, yearOfPublishingTv;
         BookWithAuthors bookWithAuthors;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public BookRowHolder(@NonNull View itemView) {
             super(itemView);
             bookNameTv = itemView.findViewById(R.id.bookName);
             authorNameTv = itemView.findViewById(R.id.authorName);

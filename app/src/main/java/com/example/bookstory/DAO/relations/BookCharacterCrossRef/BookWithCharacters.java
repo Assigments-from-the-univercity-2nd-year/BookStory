@@ -19,7 +19,7 @@ public class BookWithCharacters {
     @Relation(
             parentColumn = "bookId",
             entityColumn = "characterName",
-            associateBy = @Junction(BookAuthorCrossRef.class)
+            associateBy = @Junction(BookCharacterCrossRef.class)
     )
     public List<Character> characters;
 }

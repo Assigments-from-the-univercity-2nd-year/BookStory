@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
-import com.example.bookstory.UI.RecyclerViewAdapters.MyAdapter;
+import com.example.bookstory.UI.RecyclerViewAdapters.BookList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookListFragment extends Fragment {
@@ -22,6 +22,7 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
+
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView_bookList);
         FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
         floatingActionButton.setOnClickListener(v -> {
@@ -52,7 +53,7 @@ public class BookListFragment extends Fragment {
         dbController.insertAuthor(author);
         dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(1, author.authorName));
         dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(2, author.authorName));*/
-        recyclerView.setAdapter(new MyAdapter(getContext(), dbController.getBooksWithAuthors()));
+        recyclerView.setAdapter(new BookList(getContext(), dbController.getBooksWithAuthors()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;
     }
