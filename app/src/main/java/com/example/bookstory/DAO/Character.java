@@ -11,4 +11,9 @@ public class Character {
     public String characterName;
 
     public String pseudonyms;
+
+    public Character(@NonNull String characterName, String pseudonyms) {
+        this.characterName = characterName;
+        this.pseudonyms = pseudonyms;
+    }
 }

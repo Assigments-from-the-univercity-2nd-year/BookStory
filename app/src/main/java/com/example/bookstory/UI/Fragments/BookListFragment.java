@@ -52,7 +52,13 @@ public class BookListFragment extends Fragment {
         dbController.insertBook(book2);
         dbController.insertAuthor(author);
         dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(1, author.authorName));
-        dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(2, author.authorName));*/
+        dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(2, author.authorName));
+
+        Character character = new Character("Harry Potter",
+                "The Boy Who Lived, The Chosen One");
+        dbController.insertCharacter(character);
+        dbController.insertBookCharacterCrossRef(new BookCharacterCrossRef(1, character.characterName));
+        dbController.insertBookCharacterCrossRef(new BookCharacterCrossRef(2, character.characterName));*/
         recyclerView.setAdapter(new BookList(getContext(), dbController.getBooksWithAuthors()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;

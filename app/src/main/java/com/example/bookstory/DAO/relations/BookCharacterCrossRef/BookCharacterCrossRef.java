@@ -8,4 +8,9 @@ public class BookCharacterCrossRef {
     public int bookId;
     @NonNull
     public String characterName;
+
+    public BookCharacterCrossRef(int bookId, @NonNull String characterName) {
+        this.bookId = bookId;
+        this.characterName = characterName;
+    }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DAO.Author;
@@ -55,6 +56,7 @@ public class BookDescriptionFragment extends Fragment {
         bookNumberOfPages.setText(String.valueOf(args.getBook().numberOfPages));
 
         recyclerView.setAdapter(new CharacterList(getContext(), characters));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         if (!characters.isEmpty()) {
             noCharactersTextView.setVisibility(View.GONE);
         }
