@@ -12,6 +12,7 @@ import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBController {
@@ -42,6 +43,30 @@ public class DBController {
 
     public void insertBookCharacterCrossRef(BookCharacterCrossRef... bookCharacterCrossRefs){
         domainDAO.insertBookCharacterCrossRef(bookCharacterCrossRefs);
+    }
+
+    public List<Author> getAuthors() {
+        return domainDAO.getAuthors();
+    }
+
+    public List<String> getAuthorNames() {
+        List<String> authorNames = new ArrayList<>();
+        for (Author author : getAuthors()) {
+            authorNames.add(author.authorName);
+        }
+        return authorNames;
+    }
+
+    public List<Character> getCharacters() {
+        return domainDAO.getCharacters();
+    }
+
+    public List<String> getCharacterNames() {
+        List<String> characterNames = new ArrayList<>();
+        for (Character character : getCharacters()) {
+            characterNames.add(character.characterName);
+        }
+        return characterNames;
     }
 
     public List<BookWithAuthors> getBooksWithAuthors(){

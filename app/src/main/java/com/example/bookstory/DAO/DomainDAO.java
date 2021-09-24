@@ -67,6 +67,14 @@ public interface DomainDAO {
     List<Book> getBooks();
 
     @Transaction
+    @Query("SELECT * FROM author")
+    List<Author> getAuthors();
+
+    @Transaction
+    @Query("SELECT * FROM character")
+    List<Character> getCharacters();
+
+    @Transaction
     @Query("SELECT * FROM book")
     List<BookWithAuthors> getBooksWithAuthors();
 
