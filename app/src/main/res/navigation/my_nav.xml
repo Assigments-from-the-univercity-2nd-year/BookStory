@@ -12,16 +12,16 @@
         tools:layout="@layout/fragment_book_list" >
         <action
             android:id="@+id/action_bookListFragment_to_addBookFragment"
-            app:destination="@id/addBookFragment" />
+            app:destination="@id/addOrChangeBookFragment" />
         <action
             android:id="@+id/action_bookListFragment_to_bookDescriptionFragment"
             app:destination="@id/bookDescriptionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addBookFragment"
-        android:name="com.example.bookstory.UI.Fragments.AddBookFragment"
+        android:id="@+id/addOrChangeBookFragment"
+        android:name="com.example.bookstory.UI.Fragments.AddOrChangeBookFragment"
         android:label="fragment_add_book"
-        tools:layout="@layout/fragment_add_book" >
+        tools:layout="@layout/fragment_add_or_change_book" >
         <action
             android:id="@+id/action_addBookFragment_to_addAuthorFragment"
             app:destination="@id/addAuthorFragment" />
