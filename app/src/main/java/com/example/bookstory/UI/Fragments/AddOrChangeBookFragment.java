@@ -1,6 +1,7 @@
 package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
 import com.google.android.material.chip.Chip;
@@ -77,6 +80,20 @@ public class AddOrChangeBookFragment extends Fragment {
                 });
                 authorSelectionCg.addView(chip);
                 authorSelectionActv.setText("");
+            }
+        });
+
+        authorSelectionActv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String stringNewAuthorName = v.getText().toString();
+
+                if (!dbController.getAuthors().contains(new Author(stringNewAuthorName))) {
+                    dbController.insertAuthor(new Author(stringNewAuthorName));
+                }
+
+                v.setText("");
+                return false;
             }
         });
 
