@@ -20,21 +20,21 @@ import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DAO.Character;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
+import com.example.bookstory.UI.elements.CharacterPseudonymsDialogFragment;
 import com.example.bookstory.UI.elements.CustomChip;
 import com.example.bookstory.UI.elements.CustomChipGroup;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipDrawable;
-import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
-public class AddOrChangeBookFragment extends Fragment {
+public class AddOrChangeBookFragment extends Fragment
+        implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
 
     private View root;
     private EditText bookName;
     private AutoCompleteTextView authorSelectionActv, characterSelectionActv;
     private CustomChipGroup authorSelectionCg, characterSelectionCg;
     private DBController dbController;
+    private String characterPseudonyms = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,7 +78,16 @@ public class AddOrChangeBookFragment extends Fragment {
 
                 if (!dbController.getCharacters().contains(new Character(stringNewAuthorName, ""))) {
                     //TODO: show bottomShit for entering pseudonyms of the character
-                    dbController.insertCharacter(new Character(stringNewAuthorName, ""));
+                    CharacterPseudonymsDialogFragment dialogFragment = new CharacterPseudonymsDialogFragment();
+                    /*getChildFragmentManager().setFragmentResultListener(
+                            CharacterPseudonymsDialogFragment.TAG,
+                            , this);*/
+                    //dialogFragment.setTargetFragment(AddOrChangeBookFragment.this, 1);
+                    dialogFragment.show(getChildFragmentManager(), CharacterPseudonymsDialogFragment.TAG);
+                    if (characterPseudonyms == null) {
+                        return false;
+                    }
+                    dbController.insertCharacter(new Character(stringNewAuthorName, characterPseudonyms));
                 }
 
                 if (!isAuthorInChipGroup(stringNewAuthorName, characterSelectionCg)) {
@@ -86,6 +95,7 @@ public class AddOrChangeBookFragment extends Fragment {
                 }
 
                 v.setText("");
+                characterPseudonyms = null;
                 return false;
             }
         });
@@ -94,7 +104,7 @@ public class AddOrChangeBookFragment extends Fragment {
     /**
      * Check whether there is a Author with such name in a CustomChipGroup
      *
-     * @param authorName name of an Auhor
+     * @param authorName name of an Author
      * @param customChipGroup
      * @return
      */
@@ -145,4 +155,8 @@ public class AddOrChangeBookFragment extends Fragment {
         characterSelectionCg = root.findViewById(R.id.chipGroup_addOrChangeBook_characterSelection);
     }
 
+    @Override
+    public void applyCharacterPseudonyms(String characterPseudonyms) {
+        this.characterPseudonyms = characterPseudonyms;
+    }
 }
