@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +33,7 @@ public class AddOrChangeBookFragment extends Fragment
     private AutoCompleteTextView authorSelectionActv, characterSelectionActv;
     private CustomChipGroup authorSelectionCg, characterSelectionCg;
     private DBController dbController;
-    private String characterPseudonyms = null;
+    String stringNewCharacterName = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,15 +55,19 @@ public class AddOrChangeBookFragment extends Fragment
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 String stringNewAuthorName = v.getText().toString();
 
-                if (!dbController.getAuthors().contains(new Author(stringNewAuthorName))) {
+                if (!dbController.getAuthors().contains(new Author(stringNewAuthorName))
+                        && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
                     dbController.insertAuthor(new Author(stringNewAuthorName));
                 }
 
-                if (!isAuthorInChipGroup(stringNewAuthorName, authorSelectionCg)) {
+                if (!isAuthorInChipGroup(stringNewAuthorName, authorSelectionCg)
+                        && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
                     authorSelectionCg.addView(new CustomChip(authorSelectionCg, stringNewAuthorName));
                 }
 
                 v.setText("");
+                //updating the list of choices
+                initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
                 return false;
             }
         });
@@ -74,28 +77,20 @@ public class AddOrChangeBookFragment extends Fragment
         characterSelectionActv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String stringNewAuthorName = v.getText().toString();
+                stringNewCharacterName = v.getText().toString();
 
-                if (!dbController.getCharacters().contains(new Character(stringNewAuthorName, ""))) {
-                    //TODO: show bottomShit for entering pseudonyms of the character
+                if (!dbController.getCharacters().contains(new Character(stringNewCharacterName, ""))
+                        && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
                     CharacterPseudonymsDialogFragment dialogFragment = new CharacterPseudonymsDialogFragment();
-                    /*getChildFragmentManager().setFragmentResultListener(
-                            CharacterPseudonymsDialogFragment.TAG,
-                            , this);*/
-                    //dialogFragment.setTargetFragment(AddOrChangeBookFragment.this, 1);
                     dialogFragment.show(getChildFragmentManager(), CharacterPseudonymsDialogFragment.TAG);
-                    if (characterPseudonyms == null) {
-                        return false;
-                    }
-                    dbController.insertCharacter(new Character(stringNewAuthorName, characterPseudonyms));
                 }
 
-                if (!isAuthorInChipGroup(stringNewAuthorName, characterSelectionCg)) {
-                    characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewAuthorName));
+                if (!isAuthorInChipGroup(stringNewCharacterName, characterSelectionCg)
+                        && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
+                    characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewCharacterName));
                 }
 
                 v.setText("");
-                characterPseudonyms = null;
                 return false;
             }
         });
@@ -157,6 +152,14 @@ public class AddOrChangeBookFragment extends Fragment
 
     @Override
     public void applyCharacterPseudonyms(String characterPseudonyms) {
-        this.characterPseudonyms = characterPseudonyms;
+        dbController.insertCharacter(new Character(stringNewCharacterName, characterPseudonyms));
+
+        if (!isAuthorInChipGroup(stringNewCharacterName, characterSelectionCg)) {
+            characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewCharacterName));
+        }
+        stringNewCharacterName = null;
+
+        //updating the list in autoComplete
+        initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
     }
 }
