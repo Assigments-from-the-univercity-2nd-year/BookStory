@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +39,18 @@ public class BookDescriptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_description, container, false);
         setHasOptionsMenu(true);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                NavController navController = Navigation.findNavController(root);
+                /*BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToBookListFragment action =
+                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment();
+                */navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
+                //BookDescriptionFragmentDirections.
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return root;
     }
 

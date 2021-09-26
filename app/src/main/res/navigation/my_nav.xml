@@ -9,7 +9,7 @@
         android:id="@+id/bookListFragment"
         android:name="com.example.bookstory.UI.Fragments.BookListFragment"
         android:label="fragment_book_list"
-        tools:layout="@layout/fragment_book_list" >
+        tools:layout="@layout/fragment_book_list">
         <action
             android:id="@+id/action_bookListFragment_to_addBookFragment"
             app:destination="@id/addOrChangeBookFragment" />
@@ -44,7 +44,9 @@
             android:id="@+id/action_bookDescriptionFragment_to_addOrChangeBookFragment2"
             app:destination="@id/addOrChangeBookFragment" />
         <action
-            android:id="@+id/action_bookDescriptionFragment_self"
-            app:destination="@id/bookDescriptionFragment" />
+            android:id="@+id/action_bookDescriptionFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment"
+            app:popUpTo="@id/bookListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

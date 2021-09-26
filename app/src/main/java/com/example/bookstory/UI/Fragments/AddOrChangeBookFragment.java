@@ -13,9 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -35,6 +39,7 @@ import com.example.bookstory.UI.elements.CustomChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AddOrChangeBookFragment extends Fragment
         implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
@@ -51,7 +56,24 @@ public class AddOrChangeBookFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_add_or_change_book, container, false);
+        args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         setHasOptionsMenu(true);
+        /*ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setHomeButtonEnabled(true);
+        }
+        actionBar.setNa*/
+
+        /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Toast.makeText(root.getContext(),"back pressed",Toast.LENGTH_LONG).show();
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);*/
         return root;
     }
 
@@ -64,7 +86,6 @@ public class AddOrChangeBookFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dbController = new DBController(getContext());
-        args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         initAllViewsFromXML();
 
         initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
@@ -288,4 +309,6 @@ public class AddOrChangeBookFragment extends Fragment
         }
         return characters;
     }
+
+
 }
