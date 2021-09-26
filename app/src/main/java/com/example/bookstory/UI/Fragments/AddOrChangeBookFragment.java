@@ -3,6 +3,9 @@ package com.example.bookstory.UI.Fragments;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +43,13 @@ public class AddOrChangeBookFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_add_or_change_book, container, false);
+        setHasOptionsMenu(true);
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.apply_menu, menu);
     }
 
     @Override
@@ -94,6 +104,17 @@ public class AddOrChangeBookFragment extends Fragment
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemMenu_applyMenu_check:
+                applyChanges();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -161,5 +182,9 @@ public class AddOrChangeBookFragment extends Fragment
 
         //updating the list in autoComplete
         initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
+    }
+
+    private void applyChanges() {
+
     }
 }
