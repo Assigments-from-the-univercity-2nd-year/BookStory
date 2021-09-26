@@ -18,7 +18,7 @@ import java.util.List;
 public class DBController {
 
     Context context;
-    private DomainDAO domainDAO;
+    private final DomainDAO domainDAO;
 
     public DBController(Context context) {
         this.context = context;

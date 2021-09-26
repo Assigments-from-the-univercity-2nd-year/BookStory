@@ -33,32 +33,6 @@ public class BookListFragment extends Fragment {
         });
 
         DBController dbController = new DBController(getContext());
-        //MOCK TEST
-        /*Book book1 = new Book("Harry Potter and the Philosopher's Stone",
-                319,
-                1997,
-                "The first title in a famous series");
-        Book book2 = new Book("Harry Potter and the Chamber of Secrets",
-                251,
-                1998,
-                "The second title in a famous series");
-        Author author = new Author("J. K. Rowling");
-        List<Author> list1 = new ArrayList<>();
-        list1.add(author);
-        List<Author> list2 = new ArrayList<>();
-        list1.add(author);
-
-        dbController.insertBook(book1);
-        dbController.insertBook(book2);
-        dbController.insertAuthor(author);
-        dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(1, author.authorName));
-        dbController.insertBookAuthorCrossRef(new BookAuthorCrossRef(2, author.authorName));
-
-        Character character = new Character("Harry Potter",
-                "The Boy Who Lived, The Chosen One");
-        dbController.insertCharacter(character);
-        dbController.insertBookCharacterCrossRef(new BookCharacterCrossRef(1, character.characterName));
-        dbController.insertBookCharacterCrossRef(new BookCharacterCrossRef(2, character.characterName));*/
         recyclerView.setAdapter(new BookList(getContext(), dbController.getBooksWithAuthors()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;

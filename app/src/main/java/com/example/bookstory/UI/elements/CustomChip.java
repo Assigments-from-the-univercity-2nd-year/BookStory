@@ -2,7 +2,8 @@ package com.example.bookstory.UI.elements;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.example.bookstory.R;
 import com.google.android.material.chip.Chip;
@@ -12,7 +13,7 @@ public class CustomChip extends Chip {
     private String customChipText;
     CustomChipGroup customChipGroup;
 
-    public CustomChip(CustomChipGroup customChipGroup, String customChipText) {
+    public CustomChip(@NonNull CustomChipGroup customChipGroup, String customChipText) {
         super(customChipGroup.getContext());
         this.customChipGroup = customChipGroup;
 
@@ -29,12 +30,7 @@ public class CustomChip extends Chip {
         setPadding(60, 10, 60, 10);
         setText(customChipText);
 
-        setOnCloseIconClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customChipGroup.removeView(v);
-            }
-        });
+        setOnCloseIconClickListener(v -> customChipGroup.removeView(v));
     }
 
     public CustomChip(Context context) {

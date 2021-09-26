@@ -43,10 +43,7 @@ public class BookDescriptionFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 NavController navController = Navigation.findNavController(root);
-                /*BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToBookListFragment action =
-                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment();
-                */navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
-                //BookDescriptionFragmentDirections.
+                navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
             }
         };
 

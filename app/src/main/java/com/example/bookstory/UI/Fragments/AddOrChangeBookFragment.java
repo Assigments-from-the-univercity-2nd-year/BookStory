@@ -13,13 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -39,7 +35,6 @@ import com.example.bookstory.UI.elements.CustomChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class AddOrChangeBookFragment extends Fragment
         implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
@@ -58,22 +53,6 @@ public class AddOrChangeBookFragment extends Fragment
         root = inflater.inflate(R.layout.fragment_add_or_change_book, container, false);
         args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         setHasOptionsMenu(true);
-        /*ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            //actionBar.setHomeButtonEnabled(true);
-        }
-        actionBar.setNa*/
-
-        /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                Toast.makeText(root.getContext(),"back pressed",Toast.LENGTH_LONG).show();
-            }
-        };
-
-        requireActivity().getOnBackPressedDispatcher().addCallback(callback);*/
         return root;
     }
 
@@ -90,49 +69,43 @@ public class AddOrChangeBookFragment extends Fragment
 
         initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
         setOnItemClickListenerForSelectionActv(authorSelectionActv, authorSelectionCg);
-        authorSelectionActv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String stringNewAuthorName = v.getText().toString();
+        authorSelectionActv.setOnEditorActionListener((v, actionId, event) -> {
+            String stringNewAuthorName = v.getText().toString();
 
-                if (!dbController.getAuthors().contains(new Author(stringNewAuthorName))
-                        && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
-                    dbController.insertAuthor(new Author(stringNewAuthorName));
-                }
-
-                if (!isAuthorInChipGroup(stringNewAuthorName, authorSelectionCg)
-                        && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
-                    authorSelectionCg.addView(new CustomChip(authorSelectionCg, stringNewAuthorName));
-                }
-
-                v.setText("");
-                //updating the list of choices
-                initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
-                return false;
+            if (!dbController.getAuthors().contains(new Author(stringNewAuthorName))
+                    && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
+                dbController.insertAuthor(new Author(stringNewAuthorName));
             }
+
+            if (!isAuthorInChipGroup(stringNewAuthorName, authorSelectionCg)
+                    && !stringNewAuthorName.equals("") && !stringNewAuthorName.equals(" ")) {
+                authorSelectionCg.addView(new CustomChip(authorSelectionCg, stringNewAuthorName));
+            }
+
+            v.setText("");
+            //updating the list of choices
+            initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
+            return false;
         });
 
         initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
         setOnItemClickListenerForSelectionActv(characterSelectionActv, characterSelectionCg);
-        characterSelectionActv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                stringNewCharacterName = v.getText().toString();
+        characterSelectionActv.setOnEditorActionListener((v, actionId, event) -> {
+            stringNewCharacterName = v.getText().toString();
 
-                if (!dbController.getCharacters().contains(new Character(stringNewCharacterName, ""))
-                        && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
-                    CharacterPseudonymsDialogFragment dialogFragment = new CharacterPseudonymsDialogFragment();
-                    dialogFragment.show(getChildFragmentManager(), CharacterPseudonymsDialogFragment.TAG);
-                }
-
-                if (!isAuthorInChipGroup(stringNewCharacterName, characterSelectionCg)
-                        && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
-                    characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewCharacterName));
-                }
-
-                v.setText("");
-                return false;
+            if (!dbController.getCharacters().contains(new Character(stringNewCharacterName, ""))
+                    && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
+                CharacterPseudonymsDialogFragment dialogFragment = new CharacterPseudonymsDialogFragment();
+                dialogFragment.show(getChildFragmentManager(), CharacterPseudonymsDialogFragment.TAG);
             }
+
+            if (!isAuthorInChipGroup(stringNewCharacterName, characterSelectionCg)
+                    && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
+                characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewCharacterName));
+            }
+
+            v.setText("");
+            return false;
         });
 
         if (args.getBook() != null) {
@@ -181,16 +154,13 @@ public class AddOrChangeBookFragment extends Fragment
 
     private void setOnItemClickListenerForSelectionActv(AutoCompleteTextView selectionActv,
                                                         CustomChipGroup selectionCg) {
-        selectionActv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv = view.findViewById(android.R.id.text1);
-                String stringAuthorName = tv.getText().toString();
-                if (!isAuthorInChipGroup(stringAuthorName, selectionCg)) {
-                    selectionCg.addView(new CustomChip(selectionCg, stringAuthorName));
-                }
-                selectionActv.setText("");
+        selectionActv.setOnItemClickListener((parent, view, position, id) -> {
+            TextView tv = view.findViewById(android.R.id.text1);
+            String stringAuthorName = tv.getText().toString();
+            if (!isAuthorInChipGroup(stringAuthorName, selectionCg)) {
+                selectionCg.addView(new CustomChip(selectionCg, stringAuthorName));
             }
+            selectionActv.setText("");
         });
     }
 

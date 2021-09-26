@@ -2,7 +2,6 @@ package com.example.bookstory.UI.elements;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -28,12 +27,9 @@ public class CharacterPseudonymsDialogFragment extends DialogFragment {
         return new AlertDialog.Builder(getContext())
                 .setMessage("Введите псевдонимы:")
                 .setView(pseudonymsTv)
-                .setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String pseudonyms = pseudonymsTv.getText().toString();
-                        dialogListener.applyCharacterPseudonyms(pseudonyms);
-                    }
+                .setPositiveButton("Добавить", (dialog, which) -> {
+                    String pseudonyms = pseudonymsTv.getText().toString();
+                    dialogListener.applyCharacterPseudonyms(pseudonyms);
                 }).create();
     }
 
