@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bookstory.DAO.Author;
 import com.example.bookstory.DAO.Character;
+import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.elements.CharacterPseudonymsDialogFragment;
@@ -37,6 +39,7 @@ public class AddOrChangeBookFragment extends Fragment
     private AutoCompleteTextView authorSelectionActv, characterSelectionActv;
     private CustomChipGroup authorSelectionCg, characterSelectionCg;
     private DBController dbController;
+    private AddOrChangeBookFragmentArgs args;
     String stringNewCharacterName = null;
 
     @Override
@@ -56,6 +59,7 @@ public class AddOrChangeBookFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dbController = new DBController(getContext());
+        args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         initAllViewsFromXML();
 
         initSelectionActv(authorSelectionActv, dbController.getAuthorNames());
@@ -104,6 +108,10 @@ public class AddOrChangeBookFragment extends Fragment
                 return false;
             }
         });
+
+        if (args.getBook() != null) {
+            initBookData();
+        }
     }
 
     @Override
@@ -182,6 +190,19 @@ public class AddOrChangeBookFragment extends Fragment
 
         //updating the list in autoComplete
         initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
+    }
+
+    private void initBookData() {
+        bookNameEt.setText(args.getBook().bookName);
+        BookWithAuthors bookWithAuthors = dbController.getBookWithAuthor(args.getBook().bookId);
+        BookWithCharacters bookWithCharacters = dbController.getBookWithCharacter(args.getBook().bookId);
+
+        for (Author author : bookWithAuthors.authors) {
+            authorSelectionCg.addView(new CustomChip(authorSelectionCg, author.authorName));
+        }
+        for (Character character : bookWithCharacters.characters) {
+            characterSelectionCg.addView(new CustomChip(characterSelectionCg, character.characterName));
+        }
     }
 
     private void applyChanges() {

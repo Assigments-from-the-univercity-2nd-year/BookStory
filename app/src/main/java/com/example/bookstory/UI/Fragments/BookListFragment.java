@@ -28,7 +28,7 @@ public class BookListFragment extends Fragment {
         floatingActionButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
             BookListFragmentDirections.ActionBookListFragmentToAddBookFragment action =
-                    BookListFragmentDirections.actionBookListFragmentToAddBookFragment();
+                    BookListFragmentDirections.actionBookListFragmentToAddBookFragment(null);
             navController.navigate(action);
         });
 
