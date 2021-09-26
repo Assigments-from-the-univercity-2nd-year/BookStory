@@ -7,7 +7,6 @@ import androidx.room.Relation;
 
 import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.Character;
-import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
 
 import java.util.List;
 

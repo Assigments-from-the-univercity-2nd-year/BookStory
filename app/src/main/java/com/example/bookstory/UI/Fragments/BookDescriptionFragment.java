@@ -2,13 +2,20 @@ package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ActionOnlyNavDirections;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +38,22 @@ public class BookDescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_description, container, false);
+        setHasOptionsMenu(true);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                NavController navController = Navigation.findNavController(root);
+                navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.edit_menu, menu);
     }
 
     @Override
@@ -56,7 +78,7 @@ public class BookDescriptionFragment extends Fragment {
         bookNumberOfPages.setText(String.valueOf(args.getBook().numberOfPages));
 
         recyclerView.setAdapter(new CharacterList(getContext(), characters));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         if (!characters.isEmpty()) {
             noCharactersTextView.setVisibility(View.GONE);
         }
@@ -73,5 +95,19 @@ public class BookDescriptionFragment extends Fragment {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemMenu_editMenu_edit:
+                NavController navController = Navigation.findNavController(root);
+                BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToAddOrChangeBookFragment2 action =
+                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToAddOrChangeBookFragment2(args.getBook());
+                navController.navigate(action);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Book implements Parcelable {
     @PrimaryKey(autoGenerate = true)
-    public int bookId;
+    public long bookId;
 
     public String bookName;
     public int numberOfPages;
@@ -23,9 +23,8 @@ public class Book implements Parcelable {
         this.annotation = annotation;
     }
 
-
     protected Book(Parcel in) {
-        bookId = in.readInt();
+        bookId = in.readLong();
         bookName = in.readString();
         numberOfPages = in.readInt();
         yearOfPublication = in.readInt();
@@ -51,7 +50,7 @@ public class Book implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(bookId);
+        dest.writeLong(bookId);
         dest.writeString(bookName);
         dest.writeInt(numberOfPages);
         dest.writeInt(yearOfPublication);
