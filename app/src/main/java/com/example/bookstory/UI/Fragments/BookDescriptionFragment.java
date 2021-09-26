@@ -67,7 +67,7 @@ public class BookDescriptionFragment extends Fragment {
         bookNumberOfPages.setText(String.valueOf(args.getBook().numberOfPages));
 
         recyclerView.setAdapter(new CharacterList(getContext(), characters));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         if (!characters.isEmpty()) {
             noCharactersTextView.setVisibility(View.GONE);
         }
