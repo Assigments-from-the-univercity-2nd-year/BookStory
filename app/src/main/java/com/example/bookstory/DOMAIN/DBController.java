@@ -45,6 +45,26 @@ public class DBController {
         domainDAO.insertBookCharacterCrossRef(bookCharacterCrossRef);
     }
 
+    public void deleteAuthor(Author author) {
+        domainDAO.deleteAuthor(author);
+    }
+
+    public void deleteCharacter(Character character) {
+        domainDAO.deleteCharacter(character);
+    }
+
+    public void deleteBookAuthorCrossRef(BookAuthorCrossRef bookAuthorCrossRef) {
+        domainDAO.deleteBookAuthorCrossRef(bookAuthorCrossRef);
+    }
+
+    public void deleteBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRefs) {
+        domainDAO.deleteBookCharacterCrossRef(bookCharacterCrossRefs);
+    }
+
+    public void updateBook(Book book) {
+        domainDAO.updateBook(book);
+    }
+
     public List<Author> getAuthors() {
         return domainDAO.getAuthors();
     }

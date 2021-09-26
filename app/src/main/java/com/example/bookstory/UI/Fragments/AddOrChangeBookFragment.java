@@ -217,7 +217,6 @@ public class AddOrChangeBookFragment extends Fragment
     }
 
     private void applyChanges() {
-        String newBookName = bookNameEt.getText().toString();
         List<Author> newAuthors = getAuthors();
         List<Character> newCharacters = getCharacters();
 
@@ -241,6 +240,29 @@ public class AddOrChangeBookFragment extends Fragment
             }
         } else {
             book = args.getBook();
+            book.bookName = bookNameEt.getText().toString();
+            book.numberOfPages = Integer.parseInt(bookNumberOfPagesEt.getText().toString());
+            book.yearOfPublication = Integer.parseInt(bookYearOfPublicationEt.getText().toString());
+            book.annotation = bookAnnotation.getText().toString();
+            dbController.updateBook(book);
+
+            for (Author author : dbController.getBookWithAuthor(book.bookId).authors) {
+                dbController.deleteBookAuthorCrossRef(new BookAuthorCrossRef(book.bookId, author.authorName));
+            }
+            for (Character character : dbController.getBookWithCharacter(book.bookId).characters) {
+                dbController.deleteBookCharacterCrossRef(new BookCharacterCrossRef(book.bookId, character.characterName));
+            }
+
+            for (Author author : newAuthors) {
+                dbController.insertBookAuthorCrossRef(
+                        new BookAuthorCrossRef(book.bookId, author.authorName)
+                );
+            }
+            for (Character character : newCharacters) {
+                dbController.insertBookCharacterCrossRef(
+                        new BookCharacterCrossRef(book.bookId, character.characterName)
+                );
+            }
         }
 
         NavController navController = Navigation.findNavController(root);
