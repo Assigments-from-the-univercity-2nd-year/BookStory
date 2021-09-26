@@ -22,28 +22,12 @@
         android:name="com.example.bookstory.UI.Fragments.AddOrChangeBookFragment"
         android:label="fragment_add_book"
         tools:layout="@layout/fragment_add_or_change_book" >
-        <action
-            android:id="@+id/action_addBookFragment_to_addAuthorFragment"
-            app:destination="@id/addAuthorFragment" />
-        <action
-            android:id="@+id/action_addBookFragment_to_addCharacterFragment"
-            app:destination="@id/addCharacterFragment" />
         <argument
             android:name="book"
             app:argType="com.example.bookstory.DAO.Book"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <fragment
-        android:id="@+id/addAuthorFragment"
-        android:name="com.example.bookstory.UI.Fragments.AddAuthorFragment"
-        android:label="fragment_add_author"
-        tools:layout="@layout/fragment_add_author" />
-    <fragment
-        android:id="@+id/addCharacterFragment"
-        android:name="com.example.bookstory.UI.Fragments.AddCharacterFragment"
-        android:label="fragment_add_character"
-        tools:layout="@layout/fragment_add_character" />
     <fragment
         android:id="@+id/bookDescriptionFragment"
         android:name="com.example.bookstory.UI.Fragments.BookDescriptionFragment"

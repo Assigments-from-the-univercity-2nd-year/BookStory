@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,13 +26,14 @@ import com.example.bookstory.UI.elements.CharacterPseudonymsDialogFragment;
 import com.example.bookstory.UI.elements.CustomChip;
 import com.example.bookstory.UI.elements.CustomChipGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddOrChangeBookFragment extends Fragment
         implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
 
     private View root;
-    private EditText bookName;
+    private EditText bookNameEt;
     private AutoCompleteTextView authorSelectionActv, characterSelectionActv;
     private CustomChipGroup authorSelectionCg, characterSelectionCg;
     private DBController dbController;
@@ -164,7 +164,7 @@ public class AddOrChangeBookFragment extends Fragment
      * This method initialises all XML declared views
      */
     private void initAllViewsFromXML() {
-        bookName = root.findViewById(R.id.editText_addOrChangeBook_bookName);
+        bookNameEt = root.findViewById(R.id.editText_addOrChangeBook_bookName);
         authorSelectionActv = root.findViewById(R.id.autoCompleteTextView_addOrChangeBook_authorSelection);
         characterSelectionActv = root.findViewById(R.id.autoCompleteTextView_addOrChangeBook_characterSelection);
         authorSelectionCg = root.findViewById(R.id.chipGroup_addOrChangeBook_authorSelection);
@@ -185,6 +185,26 @@ public class AddOrChangeBookFragment extends Fragment
     }
 
     private void applyChanges() {
+        String bookName = bookNameEt.getText().toString();
+        List<Author> authors = getAuthors();
+        List<Character> characters = getCharacters();
+    }
 
+    @NonNull
+    private List<Author> getAuthors() {
+        List<Author> authors = new ArrayList<>();
+        for (CustomChip customChip : authorSelectionCg.getChips()) {
+            authors.add(dbController.getAuthorByName(customChip.getCustomChipText()));
+        }
+        return authors;
+    }
+
+    @NonNull
+    private List<Character> getCharacters() {
+        List<Character> characters = new ArrayList<>();
+        for (CustomChip customChip : characterSelectionCg.getChips()) {
+            characters.add(dbController.getCharacterByName(customChip.getCustomChipText()));
+        }
+        return characters;
     }
 }

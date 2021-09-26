@@ -57,8 +57,16 @@ public class DBController {
         return authorNames;
     }
 
+    public Author getAuthorByName(String authorName) {
+        return domainDAO.getAuthorByName(authorName);
+    }
+
     public List<Character> getCharacters() {
         return domainDAO.getCharacters();
+    }
+
+    public Character getCharacterByName(String characterName) {
+        return domainDAO.getCharacterByName(characterName);
     }
 
     public List<String> getCharacterNames() {
