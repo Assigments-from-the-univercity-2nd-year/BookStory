@@ -12,10 +12,47 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Введите имя книги"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textImeMultiLine"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_addOrChangeBook_numberOfPages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите количество страниц в книге"
+        android:inputType="number|textImeMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_addOrChangeBook_bookName" />
+
+    <EditText
+        android:id="@+id/editText_addOrChangeBook_yearOfPublication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите год издания книги"
+        android:inputType="number|textImeMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_addOrChangeBook_numberOfPages" />
+
+    <EditText
+        android:id="@+id/editText_addOrChangeBook_annotation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите аннотацию"
+        android:inputType="textPersonName|textImeMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_addOrChangeBook_yearOfPublication" />
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView_addOrChangeBook_authorSelection"
@@ -27,7 +64,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_addOrChangeBook_bookName" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_addOrChangeBook_annotation" />
 
     <com.example.bookstory.UI.elements.CustomChipGroup
         android:id="@+id/chipGroup_addOrChangeBook_authorSelection"
@@ -43,7 +80,7 @@
         android:id="@+id/autoCompleteTextView_addOrChangeBook_characterSelection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Введите имя автора книги для добавления"
+        android:hint="Введите имя персонажа книги для добавления"
         android:imeOptions="actionDone"
         android:inputType="textImeMultiLine"
         android:minHeight="48dp"

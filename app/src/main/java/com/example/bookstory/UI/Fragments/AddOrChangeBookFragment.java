@@ -35,7 +35,7 @@ public class AddOrChangeBookFragment extends Fragment
         implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
 
     private View root;
-    private EditText bookNameEt;
+    private EditText bookNameEt, bookNumberOfPagesEt, bookYearOfPublicationEt, bookAnnotation;
     private AutoCompleteTextView authorSelectionActv, characterSelectionActv;
     private CustomChipGroup authorSelectionCg, characterSelectionCg;
     private DBController dbController;
@@ -173,6 +173,9 @@ public class AddOrChangeBookFragment extends Fragment
      */
     private void initAllViewsFromXML() {
         bookNameEt = root.findViewById(R.id.editText_addOrChangeBook_bookName);
+        bookNumberOfPagesEt = root.findViewById(R.id.editText_addOrChangeBook_numberOfPages);
+        bookYearOfPublicationEt = root.findViewById(R.id.editText_addOrChangeBook_yearOfPublication);
+        bookAnnotation = root.findViewById(R.id.editText_addOrChangeBook_annotation);
         authorSelectionActv = root.findViewById(R.id.autoCompleteTextView_addOrChangeBook_authorSelection);
         characterSelectionActv = root.findViewById(R.id.autoCompleteTextView_addOrChangeBook_characterSelection);
         authorSelectionCg = root.findViewById(R.id.chipGroup_addOrChangeBook_authorSelection);
@@ -194,6 +197,9 @@ public class AddOrChangeBookFragment extends Fragment
 
     private void initBookData() {
         bookNameEt.setText(args.getBook().bookName);
+        bookNumberOfPagesEt.setText(String.valueOf(args.getBook().numberOfPages));
+        bookYearOfPublicationEt.setText(String.valueOf(args.getBook().yearOfPublication));
+        bookAnnotation.setText(args.getBook().annotation);
         BookWithAuthors bookWithAuthors = dbController.getBookWithAuthor(args.getBook().bookId);
         BookWithCharacters bookWithCharacters = dbController.getBookWithCharacter(args.getBook().bookId);
 
@@ -206,9 +212,13 @@ public class AddOrChangeBookFragment extends Fragment
     }
 
     private void applyChanges() {
-        String bookName = bookNameEt.getText().toString();
-        List<Author> authors = getAuthors();
-        List<Character> characters = getCharacters();
+        String newBookName = bookNameEt.getText().toString();
+        List<Author> newAuthors = getAuthors();
+        List<Character> newCharacters = getCharacters();
+
+        if (args.getBook() == null) {
+            dbController.insertBook();
+        }
     }
 
     @NonNull
