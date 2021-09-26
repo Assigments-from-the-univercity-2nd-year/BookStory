@@ -30,7 +30,12 @@ public class DBController {
     }
 
     public void insertBook(Book... books){
-        domainDAO.insertBook(books);
+        for (Book book :
+                books) {
+            if (domainDAO.getBookByName(book.bookName) == null) {
+                domainDAO.insertBook(books);
+            }
+        }
     }
 
     public void insertCharacter(Character... characters){
@@ -43,6 +48,10 @@ public class DBController {
 
     public void insertBookCharacterCrossRef(BookCharacterCrossRef... bookCharacterCrossRefs){
         domainDAO.insertBookCharacterCrossRef(bookCharacterCrossRefs);
+    }
+
+    public Book getBookByName(String bookName) {
+        return domainDAO.getBookByName(bookName);
     }
 
     public List<Author> getAuthors() {

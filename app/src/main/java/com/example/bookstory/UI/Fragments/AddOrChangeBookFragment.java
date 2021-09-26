@@ -17,10 +17,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.bookstory.DAO.Author;
+import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.Character;
+import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
@@ -216,9 +221,34 @@ public class AddOrChangeBookFragment extends Fragment
         List<Author> newAuthors = getAuthors();
         List<Character> newCharacters = getCharacters();
 
+
         if (args.getBook() == null) {
-            dbController.insertBook();
+            Book book = new Book(
+                    bookNameEt.getText().toString(),
+                    (int) Integer.valueOf(bookNumberOfPagesEt.getText().toString()),
+                    (int) Integer.valueOf(bookYearOfPublicationEt.getText().toString()),
+                    bookAnnotation.getText().toString());
+            dbController.insertBook(book);
+            book = dbController.getBookByName(book.bookName);
+            for (Author author :
+                    newAuthors) {
+                dbController.insertBookAuthorCrossRef(
+                        new BookAuthorCrossRef(book.bookId, author.authorName)
+                );
+            }
+            for (Character character :
+                    newCharacters) {
+                dbController.insertBookCharacterCrossRef(
+                        new BookCharacterCrossRef(book.bookId, character.characterName)
+                );
+            }
         }
+
+        NavController navController = Navigation.findNavController(root);
+        AddOrChangeBookFragmentDirections.ActionAddOrChangeBookFragmentToBookDescriptionFragment action =
+                AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookDescriptionFragment(
+                        dbController.getBookByName(bookNameEt.getText().toString()));
+        navController.navigate(action);
     }
 
     @NonNull
