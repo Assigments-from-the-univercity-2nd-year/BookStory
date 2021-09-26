@@ -221,33 +221,31 @@ public class AddOrChangeBookFragment extends Fragment
         List<Author> newAuthors = getAuthors();
         List<Character> newCharacters = getCharacters();
 
-
+        Book book;
         if (args.getBook() == null) {
-            Book book = new Book(
+            book = new Book(
                     bookNameEt.getText().toString(),
-                    (int) Integer.valueOf(bookNumberOfPagesEt.getText().toString()),
-                    (int) Integer.valueOf(bookYearOfPublicationEt.getText().toString()),
+                    Integer.parseInt(bookNumberOfPagesEt.getText().toString()),
+                    Integer.parseInt(bookYearOfPublicationEt.getText().toString()),
                     bookAnnotation.getText().toString());
-            dbController.insertBook(book);
-            book = dbController.getBookByName(book.bookName);
-            for (Author author :
-                    newAuthors) {
+            book.bookId = dbController.insertBook(book);
+            for (Author author : newAuthors) {
                 dbController.insertBookAuthorCrossRef(
                         new BookAuthorCrossRef(book.bookId, author.authorName)
                 );
             }
-            for (Character character :
-                    newCharacters) {
+            for (Character character : newCharacters) {
                 dbController.insertBookCharacterCrossRef(
                         new BookCharacterCrossRef(book.bookId, character.characterName)
                 );
             }
+        } else {
+            book = args.getBook();
         }
 
         NavController navController = Navigation.findNavController(root);
         AddOrChangeBookFragmentDirections.ActionAddOrChangeBookFragmentToBookDescriptionFragment action =
-                AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookDescriptionFragment(
-                        dbController.getBookByName(bookNameEt.getText().toString()));
+                AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookDescriptionFragment(book);
         navController.navigate(action);
     }
 

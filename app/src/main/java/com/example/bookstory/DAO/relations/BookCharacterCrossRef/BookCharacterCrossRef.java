@@ -5,11 +5,11 @@ import androidx.room.Entity;
 
 @Entity(primaryKeys = {"bookId", "characterName"})
 public class BookCharacterCrossRef {
-    public int bookId;
+    public long bookId;
     @NonNull
     public String characterName;
 
-    public BookCharacterCrossRef(int bookId, @NonNull String characterName) {
+    public BookCharacterCrossRef(long bookId, @NonNull String characterName) {
         this.bookId = bookId;
         this.characterName = characterName;
     }

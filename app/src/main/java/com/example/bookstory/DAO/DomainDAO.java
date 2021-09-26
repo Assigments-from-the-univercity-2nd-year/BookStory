@@ -18,19 +18,19 @@ import java.util.List;
 @Dao
 public interface DomainDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAuthor(Author... authors);
+    void insertAuthor(Author authors);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertBook(Book... books);
+    long insertBook(Book books);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertCharacter(Character... characters);
+    void insertCharacter(Character characters);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertBookAuthorCrossRef(BookAuthorCrossRef... bookAuthorCrossRef);
+    void insertBookAuthorCrossRef(BookAuthorCrossRef bookAuthorCrossRef);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertBookCharacterCrossRef(BookCharacterCrossRef... bookCharacterCrossRefs);
+    void insertBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRef);
 
     @Delete
     void deleteAuthor(Author author);
@@ -67,8 +67,8 @@ public interface DomainDAO {
     List<Book> getBooks();
 
     @Transaction
-    @Query("SELECT * FROM book WHERE bookName = :bookName")
-    Book getBookByName(String bookName);
+    @Query("SELECT * FROM book WHERE bookId = :bookId")
+    Book getBooksById(long bookId);
 
     @Transaction
     @Query("SELECT * FROM author")
@@ -92,9 +92,9 @@ public interface DomainDAO {
 
     @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
-    BookWithAuthors getBookWithAuthor(int bookId);
+    BookWithAuthors getBookWithAuthor(long bookId);
 
     @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
-    BookWithCharacters getBookWithCharacter(int bookId);
+    BookWithCharacters getBookWithCharacter(long bookId);
 }

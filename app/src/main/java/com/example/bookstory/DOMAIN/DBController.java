@@ -25,37 +25,32 @@ public class DBController {
         domainDAO = AppDatabase.getInstance(context).domainDAO();
     }
 
-    public void insertAuthor(Author... authors){
-        domainDAO.insertAuthor(authors);
+    public void insertAuthor(Author author) {
+        domainDAO.insertAuthor(author);
     }
 
-    public void insertBook(Book... books){
-        for (Book book :
-                books) {
-            if (domainDAO.getBookByName(book.bookName) == null) {
-                domainDAO.insertBook(books);
-            }
-        }
+    public long insertBook(Book book) {
+        return domainDAO.insertBook(book);
     }
 
-    public void insertCharacter(Character... characters){
-        domainDAO.insertCharacter(characters);
+    public void insertCharacter(Character character) {
+        domainDAO.insertCharacter(character);
     }
 
-    public void insertBookAuthorCrossRef(BookAuthorCrossRef... bookAuthorCrossRef){
+    public void insertBookAuthorCrossRef(BookAuthorCrossRef bookAuthorCrossRef) {
         domainDAO.insertBookAuthorCrossRef(bookAuthorCrossRef);
     }
 
-    public void insertBookCharacterCrossRef(BookCharacterCrossRef... bookCharacterCrossRefs){
-        domainDAO.insertBookCharacterCrossRef(bookCharacterCrossRefs);
-    }
-
-    public Book getBookByName(String bookName) {
-        return domainDAO.getBookByName(bookName);
+    public void insertBookCharacterCrossRef(BookCharacterCrossRef bookCharacterCrossRef) {
+        domainDAO.insertBookCharacterCrossRef(bookCharacterCrossRef);
     }
 
     public List<Author> getAuthors() {
         return domainDAO.getAuthors();
+    }
+
+    public Book getBooksById(long bookId) {
+        return domainDAO.getBooksById(bookId);
     }
 
     public List<String> getAuthorNames() {
@@ -86,15 +81,15 @@ public class DBController {
         return characterNames;
     }
 
-    public List<BookWithAuthors> getBooksWithAuthors(){
+    public List<BookWithAuthors> getBooksWithAuthors() {
         return domainDAO.getBooksWithAuthors();
     }
 
-    public BookWithAuthors getBookWithAuthor(int bookId) {
+    public BookWithAuthors getBookWithAuthor(long bookId) {
         return domainDAO.getBookWithAuthor(bookId);
     }
 
-    public BookWithCharacters getBookWithCharacter(int bookId) {
+    public BookWithCharacters getBookWithCharacter(long bookId) {
         return domainDAO.getBookWithCharacter(bookId);
     }
 }
