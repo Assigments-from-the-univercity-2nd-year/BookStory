@@ -19,6 +19,8 @@ import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.DOMAIN.Sortables.SortableArrayList;
 import com.example.bookstory.DOMAIN.SortingController;
+import com.example.bookstory.DOMAIN.enums.Criterion;
+import com.example.bookstory.DOMAIN.enums.Order;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.RecyclerViewAdapters.BookList;
 import com.example.bookstory.UI.elements.SortPreferencesDialogFragment;
@@ -56,16 +58,6 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.sort_menu, menu);
-        //menu.setGroupCheckable(1, true, true);
-        //MenuItem item = menu.findItem(R.id.appBarSwitch_sortMenu_useSecondParameter);
-//        item.setActionView(R.layout.switch_item);
-        /*SwitchCompat s = (SwitchCompat) item;
-        s.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
     }
 
     @Override
@@ -74,14 +66,6 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
             case R.id.menuItem_sortMenu_sortBy:
                 SortPreferencesDialogFragment dialogFragment = new SortPreferencesDialogFragment();
                 dialogFragment.show(getChildFragmentManager(), SortPreferencesDialogFragment.TAG);
-                /*item.setActionView(R.layout.switch_item);
-                final Switch s = (Switch) item.getActionView().findViewById(R.id.switch_switchItem_switch);
-                s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        //BookListFragment.super.onCheckedChanged()
-                    }
-                });*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -89,10 +73,32 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
 
     @Override
     public void applySortPreferences(int argId, int sortById, boolean isInclude) {
-        /*SortingController.sort(
+        Criterion criterion;
+        Order order;
+
+        switch (argId) {
+            case R.id.radioButton_dialogSortPref_yearOfPublication:
+                criterion = Criterion.DATE_OF_PUBLICATION;
+                break;
+            case R.id.radioButton_dialogSortPref_numberOfPages:
+                criterion = Criterion.NUMBER_OF_PAGES;
+                break;
+            default:
+                criterion = Criterion.NAME_OF_TITLE;
+        }
+
+        switch (sortById) {
+            case R.id.radioButton_dialogSortPref_ASC:
+                order = Order.ASCENDING_ORDER;
+                break;
+            default:
+                order = Order.DESCENDING_ORDER;
+        }
+
+        SortingController.sort(
                 bookWithAuthorsList,
-                bookWithAuthorsList.spliterator().getComparator(),
-                SortableArrayList.class);*/
+                SortingController.getComparatorForBookWithAuthors(criterion, order, isInclude),
+                SortableArrayList.class);
         recyclerView.setAdapter(new BookList(getContext(), bookWithAuthorsList));
     }
 }

@@ -13,20 +13,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButton_dialogSortPref_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="имени" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButton_dialogSortPref_numberOfPages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="количеству страниц" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioButton_dialogSortPref_yearOfPublication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="году выпуска" />
@@ -50,14 +50,14 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup_dialogSortPref_selectArg">
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/radioButton_dialogSortPref_DESC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="Сортировать по убыванию" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/radioButton_dialogSortPref_ASC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Сортировать за возрастанием" />
