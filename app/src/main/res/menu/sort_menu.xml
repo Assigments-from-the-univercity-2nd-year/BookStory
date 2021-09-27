@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuItem_sortMenu_sortBy"
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:title="sortBy"
+        app:showAsAction="ifRoom" >
+
+        <!--<menu>
+            <group>
+
+                <item
+                    android:id="@+id/menuItem_sortMenu_sortByName"
+                    android:title="Сортировать за именем"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/menuItem_sortMenu_sortByNumberOfPages"
+                    android:title="Сортировать за количеством страниц"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/menuItem_sortMenu_sortByYearOfPublication"
+                    android:title="Сортировать за годом выпуска"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/appBarSwitch_sortMenu_useSecondParameter"
+                    android:title="Включить второй параметр"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+
+            </group>
+
+            <group>
+                <item
+                    android:id="@+id/menuItem_sortMenu_sortByName1"
+                    android:title="Сортировать за именем"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/menuItem_sortMenu_sortByNumberOfPages1"
+                    android:title="Сортировать за количеством страниц"
+                    android:checkable="true"
+                    app:showAsAction="always" />
+            </group>
+
+            <item
+                android:id="@+id/menuItem_sortMenu_sortByNumberOfPages2"
+                android:title="Сортировать за количеством страниц"
+                android:checkable="true"
+                app:showAsAction="always" />
+
+        </menu>-->
+
+    </item>
+
+</menu>

@@ -13,7 +13,7 @@ import androidx.fragment.app.DialogFragment;
 
 public class CharacterPseudonymsDialogFragment extends DialogFragment {
 
-    public static String TAG = "DialogHost";
+    public static String TAG = "CharacterPseudonymsDialogHost";
     CharacterPseudonymsDialogListener dialogListener;
     EditText pseudonymsTv;
 
