@@ -1,12 +1,9 @@
 package com.example.bookstory.DOMAIN;
 
-import com.example.bookstory.DAO.Author;
-import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.Sortables.Sortable;
 import com.example.bookstory.DOMAIN.enums.Criterion;
 import com.example.bookstory.DOMAIN.enums.Order;
-import com.example.bookstory.DOMAIN.enums.SortingAlgorithm;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -22,10 +19,6 @@ public class SortingController {
     ) {
         class BookWithAuthorsComparator implements Comparator {
 
-            //пускай, по умолчанию мы сортируем за убыванием.
-            //Если мы сортируем за возрастанием, то *(-1)
-            //
-            //
             @Override
             public int compare(Object o1, Object o2) {
                 int result = 0;
