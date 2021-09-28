@@ -30,7 +30,7 @@ public class SortingController {
                     case NAME_OF_TITLE:
                         result = b1.book.bookName.compareTo(b2.book.bookName);
                         break;
-                    case DATE_OF_PUBLICATION:
+                    case YEAR_OF_PUBLICATION:
                         result = Integer.compare(b1.book.yearOfPublication, b2.book.yearOfPublication);
                         break;
                     case NUMBER_OF_PAGES:

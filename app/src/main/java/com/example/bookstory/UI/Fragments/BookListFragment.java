@@ -78,7 +78,7 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
 
         switch (argId) {
             case R.id.radioButton_dialogSortPref_yearOfPublication:
-                criterion = Criterion.DATE_OF_PUBLICATION;
+                criterion = Criterion.YEAR_OF_PUBLICATION;
                 break;
             case R.id.radioButton_dialogSortPref_numberOfPages:
                 criterion = Criterion.NUMBER_OF_PAGES;
