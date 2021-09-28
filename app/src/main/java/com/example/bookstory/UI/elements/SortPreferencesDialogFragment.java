@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ public class SortPreferencesDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_sort_preferences, null);
         RadioGroup selectArg, selectOrder;
+        Switch aSwitch = v.findViewById(R.id.switch1);
         selectArg = v.findViewById(R.id.radioGroup_dialogSortPref_selectArg);
         selectOrder = v.findViewById(R.id.radioGroup_dialogSortPref_selectOrder);
         return new AlertDialog.Builder(getContext())
@@ -34,7 +36,7 @@ public class SortPreferencesDialogFragment extends DialogFragment {
                         (dialog, which) -> dialogListener.applySortPreferences(
                                 selectArg.getCheckedRadioButtonId(),
                                 selectOrder.getCheckedRadioButtonId(),
-                                false)).create();
+                                aSwitch.isChecked())).create();
     }
 
     @Override
