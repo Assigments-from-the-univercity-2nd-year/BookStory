@@ -1,5 +1,7 @@
 package com.example.bookstory.DOMAIN;
 
+import androidx.annotation.NonNull;
+
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.Sortables.Sortable;
 import com.example.bookstory.DOMAIN.enums.Criterion;
@@ -37,7 +39,7 @@ public class SortingController {
                         result = Integer.compare(b1.book.numberOfPages, b2.book.numberOfPages);
                 }
 
-                if (isInclude && result ==0) {
+                if (isInclude && result == 0) {
                     result = Integer.compare(b1.book.annotation.length(), b2.book.annotation.length());
                 }
 
@@ -56,21 +58,7 @@ public class SortingController {
     public static <T> void sort(
             List<T> list,
             Comparator<? super T> comparator,
-            Class<? extends Sortable> sortingAlgoClass) {
-        try {
-            Constructor<? extends Sortable> constructor = sortingAlgoClass.getConstructor();
-            Sortable sortable = constructor.newInstance();
-            sortable.sort(list, comparator);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            Logger logger = Logger.getLogger("SortingController");
-            logger.log(Level.SEVERE, "The " + sortingAlgoClass.getCanonicalName() +
-                    " should have a public default constructor with no parameters.");
-        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            e.printStackTrace();
-            Logger logger = Logger.getLogger("SortingController");
-            logger.log(Level.SEVERE, "The " + sortingAlgoClass.getCanonicalName() +
-                    " should have a public de3fault constructor with no parameters.");
-        }
+            @NonNull Sortable sortingAlgo) {
+        sortingAlgo.sort(list, comparator);
     }
 }

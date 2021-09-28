@@ -17,21 +17,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.DBController;
+import com.example.bookstory.DOMAIN.Sortables.Sortable;
 import com.example.bookstory.DOMAIN.Sortables.SortableArrayList;
 import com.example.bookstory.DOMAIN.SortingController;
 import com.example.bookstory.DOMAIN.enums.Criterion;
 import com.example.bookstory.DOMAIN.enums.Order;
 import com.example.bookstory.R;
 import com.example.bookstory.UI.RecyclerViewAdapters.BookList;
+import com.example.bookstory.UI.elements.AlgoPreferencesDialogFragment;
 import com.example.bookstory.UI.elements.SortPreferencesDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class BookListFragment extends Fragment implements SortPreferencesDialogFragment.SortPreferencesDialogListener {
+public class BookListFragment extends Fragment
+        implements SortPreferencesDialogFragment.SortPreferencesDialogListener,
+        AlgoPreferencesDialogFragment.AlgoPreferencesDialogListener {
 
     List<BookWithAuthors> bookWithAuthorsList;
     RecyclerView recyclerView;
+    Sortable currentAlgorithm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,8 +69,13 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuItem_sortMenu_sortBy:
-                SortPreferencesDialogFragment dialogFragment = new SortPreferencesDialogFragment();
-                dialogFragment.show(getChildFragmentManager(), SortPreferencesDialogFragment.TAG);
+                SortPreferencesDialogFragment sortDialogFragment = new SortPreferencesDialogFragment();
+                sortDialogFragment.show(getChildFragmentManager(), SortPreferencesDialogFragment.TAG);
+                return true;
+            case R.id.menuItem_sortMenu_algoPref:
+                AlgoPreferencesDialogFragment algoDialogFragment = new AlgoPreferencesDialogFragment();
+                algoDialogFragment.show(getChildFragmentManager(), AlgoPreferencesDialogFragment.TAG);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -98,7 +108,12 @@ public class BookListFragment extends Fragment implements SortPreferencesDialogF
         SortingController.sort(
                 bookWithAuthorsList,
                 SortingController.getComparatorForBookWithAuthors(criterion, order, isInclude),
-                SortableArrayList.class);
+                currentAlgorithm);
         recyclerView.setAdapter(new BookList(getContext(), bookWithAuthorsList));
+    }
+
+    @Override
+    public void applyAlgoPreferences(Sortable sortable) {
+        currentAlgorithm = sortable;
     }
 }
