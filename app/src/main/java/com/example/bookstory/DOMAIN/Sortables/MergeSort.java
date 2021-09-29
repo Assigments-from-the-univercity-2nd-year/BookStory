@@ -19,10 +19,10 @@ public class MergeSort implements Sortable{
         List<T> r = new ArrayList<>(n-mid);
 
         for (int i = 0; i < mid; i++) {
-            l.set(i, list.get(i));
+            l.add(list.get(i));
         }
         for (int i = mid; i < n; i++) {
-            r.set(i-mid, list.get(i));
+            r.add(list.get(i));
         }
         mergeSort(l, mid, c);
         mergeSort(r, n - mid, c);
