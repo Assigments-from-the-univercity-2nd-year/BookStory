@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DOMAIN.DBController;
+import com.example.bookstory.DOMAIN.Sortables.DefaultSort;
 import com.example.bookstory.DOMAIN.Sortables.Sortable;
-import com.example.bookstory.DOMAIN.Sortables.SortableArrayList;
 import com.example.bookstory.DOMAIN.SortingController;
 import com.example.bookstory.DOMAIN.enums.Criterion;
 import com.example.bookstory.DOMAIN.enums.Order;
@@ -36,7 +36,7 @@ public class BookListFragment extends Fragment
 
     List<BookWithAuthors> bookWithAuthorsList;
     RecyclerView recyclerView;
-    Sortable currentAlgorithm;
+    Sortable currentAlgorithm = new DefaultSort();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,6 +114,8 @@ public class BookListFragment extends Fragment
 
     @Override
     public void applyAlgoPreferences(Sortable sortable) {
-        currentAlgorithm = sortable;
+        if (sortable != null) {
+            currentAlgorithm = sortable;
+        }
     }
 }

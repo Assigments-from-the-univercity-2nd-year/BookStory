@@ -14,8 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.bookstory.DOMAIN.Sortables.Sortable;
-import com.example.bookstory.DOMAIN.Sortables.SortableArrayList;
+import com.example.bookstory.DOMAIN.Sortables.*;
 import com.example.bookstory.R;
 
 import java.util.ArrayList;
@@ -33,8 +32,16 @@ public class AlgoPreferencesDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_algo_preferences, null);
         RadioGroup radioGroup = v.findViewById(R.id.radioGroup_dialogAlgoPreferences_radioGroup);
+
+        //TODO: add reflection mechanism
         List<Sortable> sortableList = new ArrayList<>();
-        sortableList.add(new SortableArrayList());
+        sortableList.add(new BubbleSort());
+        sortableList.add(new DefaultSort());
+        sortableList.add(new InsertionSort());
+        sortableList.add(new MergeSort());
+        sortableList.add(new QuickSort());
+        sortableList.add(new SelectionSort());
+
         Map<Integer, Sortable> map = new HashMap<>();
         for (int i = 0; i < sortableList.size(); i++) {
             RadioButton radioButton = new RadioButton(getContext());
