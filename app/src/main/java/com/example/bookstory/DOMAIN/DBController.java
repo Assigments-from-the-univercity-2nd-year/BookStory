@@ -11,6 +11,7 @@ import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.TypeOfParticipation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +112,10 @@ public class DBController {
 
     public BookWithCharacters getBookWithCharacter(long bookId) {
         return domainDAO.getBookWithCharacter(bookId);
+    }
+
+    public TypeOfParticipation getTypeOfParticipationCharacterInBook(
+            long bookId, String characterName) {
+        return domainDAO.getTypeOfParticipationCharacterInBook(bookId, characterName);
     }
 }

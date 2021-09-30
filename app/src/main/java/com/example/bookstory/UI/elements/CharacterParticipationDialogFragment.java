@@ -44,9 +44,13 @@ public class CharacterParticipationDialogFragment extends DialogFragment {
 
     private void init() {
         radioGroup = new RadioGroup(getContext());
+
         mainCharacterRb = new MaterialRadioButton(getContext());
+        mainCharacterRb.setText("Главный герой");
         minorCharacterRb = new MaterialRadioButton(getContext());
+        minorCharacterRb.setText("Второстепеный герой");
         episodicCharacterRb = new MaterialRadioButton(getContext());
+        episodicCharacterRb.setText("Эпизодический герой");
 
         radioGroup.addView(mainCharacterRb);
         radioGroup.addView(minorCharacterRb);
