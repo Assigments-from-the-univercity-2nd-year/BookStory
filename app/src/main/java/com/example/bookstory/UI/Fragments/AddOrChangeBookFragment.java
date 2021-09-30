@@ -1,6 +1,7 @@
 package com.example.bookstory.UI.Fragments;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,9 +28,12 @@ import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.TypeOfParticipation;
 import com.example.bookstory.DOMAIN.DBController;
 import com.example.bookstory.R;
+import com.example.bookstory.UI.elements.CharacterParticipationDialogFragment;
 import com.example.bookstory.UI.elements.CharacterPseudonymsDialogFragment;
+import com.example.bookstory.UI.elements.CustomCharacterChip;
 import com.example.bookstory.UI.elements.CustomChip;
 import com.example.bookstory.UI.elements.CustomChipGroup;
 
@@ -37,7 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddOrChangeBookFragment extends Fragment
-        implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener {
+        implements CharacterPseudonymsDialogFragment.CharacterPseudonymsDialogListener,
+        CharacterParticipationDialogFragment.CharacterParticipationDialogListener {
 
     private View root;
     private EditText bookNameEt, bookNumberOfPagesEt, bookYearOfPublicationEt, bookAnnotation;
@@ -93,15 +98,18 @@ public class AddOrChangeBookFragment extends Fragment
         characterSelectionActv.setOnEditorActionListener((v, actionId, event) -> {
             stringNewCharacterName = v.getText().toString();
 
+            // Check if there is the character in DB and insert if not
             if (!dbController.getCharacters().contains(new Character(stringNewCharacterName, ""))
                     && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
                 CharacterPseudonymsDialogFragment dialogFragment = new CharacterPseudonymsDialogFragment();
                 dialogFragment.show(getChildFragmentManager(), CharacterPseudonymsDialogFragment.TAG);
             }
 
+            // Check if there is the character in ChipGroup and add if not
             if (!isAuthorInChipGroup(stringNewCharacterName, characterSelectionCg)
                     && !stringNewCharacterName.equals("") && !stringNewCharacterName.equals(" ")) {
-                characterSelectionCg.addView(new CustomChip(characterSelectionCg, stringNewCharacterName));
+                CharacterParticipationDialogFragment dialogFragment = new CharacterParticipationDialogFragment();
+                dialogFragment.show(getChildFragmentManager(), CharacterParticipationDialogFragment.TAG);
             }
 
             v.setText("");
@@ -191,6 +199,13 @@ public class AddOrChangeBookFragment extends Fragment
         initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
     }
 
+    @Override
+    public void applyCharacterParticipation(TypeOfParticipation typeOfParticipation) {
+        characterSelectionCg.addView(new CustomCharacterChip(
+                characterSelectionCg, stringNewCharacterName, typeOfParticipation
+        ));
+    }
+
     private void initBookData() {
         bookNameEt.setText(args.getBook().bookName);
         bookNumberOfPagesEt.setText(String.valueOf(args.getBook().numberOfPages));
@@ -209,7 +224,7 @@ public class AddOrChangeBookFragment extends Fragment
 
     private void applyChanges() {
         List<Author> newAuthors = getAuthors();
-        List<Character> newCharacters = getCharacters();
+        List<Pair<Character, TypeOfParticipation>> newCharacters = getCharacters();
 
         Book book;
         if (args.getBook() == null) {
@@ -224,9 +239,13 @@ public class AddOrChangeBookFragment extends Fragment
                         new BookAuthorCrossRef(book.bookId, author.authorName)
                 );
             }
-            for (Character character : newCharacters) {
+            for (Pair<Character, TypeOfParticipation> characterWithTypeOfParticipation : newCharacters) {
                 dbController.insertBookCharacterCrossRef(
-                        new BookCharacterCrossRef(book.bookId, character.characterName)
+                        new BookCharacterCrossRef(
+                                book.bookId,
+                                characterWithTypeOfParticipation.first.characterName,
+                                characterWithTypeOfParticipation.second
+                        )
                 );
             }
         } else {
@@ -241,7 +260,7 @@ public class AddOrChangeBookFragment extends Fragment
                 dbController.deleteBookAuthorCrossRef(new BookAuthorCrossRef(book.bookId, author.authorName));
             }
             for (Character character : dbController.getBookWithCharacter(book.bookId).characters) {
-                dbController.deleteBookCharacterCrossRef(new BookCharacterCrossRef(book.bookId, character.characterName));
+                dbController.deleteBookCharacterCrossRef(new BookCharacterCrossRef(book.bookId, character.characterName, null));
             }
 
             for (Author author : newAuthors) {
@@ -249,9 +268,13 @@ public class AddOrChangeBookFragment extends Fragment
                         new BookAuthorCrossRef(book.bookId, author.authorName)
                 );
             }
-            for (Character character : newCharacters) {
+            for (Pair<Character, TypeOfParticipation> characterWithTypeOfParticipation : newCharacters) {
                 dbController.insertBookCharacterCrossRef(
-                        new BookCharacterCrossRef(book.bookId, character.characterName)
+                        new BookCharacterCrossRef(
+                                book.bookId,
+                                characterWithTypeOfParticipation.first.characterName,
+                                characterWithTypeOfParticipation.second
+                        )
                 );
             }
         }
@@ -272,13 +295,16 @@ public class AddOrChangeBookFragment extends Fragment
     }
 
     @NonNull
-    private List<Character> getCharacters() {
-        List<Character> characters = new ArrayList<>();
+    private List<Pair<Character, TypeOfParticipation>> getCharacters() {
+        List<Pair<Character, TypeOfParticipation>> characters = new ArrayList<>();
         for (CustomChip customChip : characterSelectionCg.getChips()) {
-            characters.add(dbController.getCharacterByName(customChip.getCustomChipText()));
+            CustomCharacterChip chip = (CustomCharacterChip) customChip;
+            characters.add(new Pair<>(
+                    dbController.getCharacterByName(customChip.getCustomChipText()),
+                    chip.getTypeOfParticipation()
+            ));
         }
         return characters;
     }
-
 
 }
