@@ -103,7 +103,7 @@ public class BookDescriptionFragment extends Fragment {
             case R.id.itemMenu_editMenu_edit:
                 NavController navController = Navigation.findNavController(root);
                 BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToAddOrChangeBookFragment2 action =
-                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToAddOrChangeBookFragment2(args.getBook());
+                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToAddOrChangeBookFragment2().setBook(args.getBook());
                 navController.navigate(action);
                 return true;
             default:

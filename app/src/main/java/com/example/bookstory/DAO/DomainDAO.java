@@ -92,6 +92,11 @@ public interface DomainDAO {
     List<BookWithAuthors> getBooksWithAuthors();
 
     @Transaction
+    @Query("SELECT * FROM book WHERE bookId IN " +
+            "(SELECT bookId FROM bookcharactercrossref WHERE characterName = :characterName)")
+    List<BookWithAuthors> getBooksWithAuthors(String characterName);
+
+    @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
     BookWithAuthors getBookWithAuthor(long bookId);
 

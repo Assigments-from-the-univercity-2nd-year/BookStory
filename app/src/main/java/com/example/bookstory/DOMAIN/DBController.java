@@ -106,6 +106,10 @@ public class DBController {
         return domainDAO.getBooksWithAuthors();
     }
 
+    public List<BookWithAuthors> getBooksWithAuthors(String characterName) {
+        return domainDAO.getBooksWithAuthors(characterName);
+    }
+
     public BookWithAuthors getBookWithAuthor(long bookId) {
         return domainDAO.getBookWithAuthor(bookId);
     }

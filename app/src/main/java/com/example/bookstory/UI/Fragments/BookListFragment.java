@@ -43,18 +43,23 @@ public class BookListFragment extends Fragment
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
         setHasOptionsMenu(true);
+        Bundle data = getArguments();
 
         recyclerView = root.findViewById(R.id.recyclerView_bookList);
         FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
         floatingActionButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
             BookListFragmentDirections.ActionBookListFragmentToAddBookFragment action =
-                    BookListFragmentDirections.actionBookListFragmentToAddBookFragment(null);
+                    BookListFragmentDirections.actionBookListFragmentToAddBookFragment();
             navController.navigate(action);
         });
 
         DBController dbController = new DBController(getContext());
-        bookWithAuthorsList = dbController.getBooksWithAuthors();
+        if (data == null) {
+            bookWithAuthorsList = dbController.getBooksWithAuthors();
+        } else {
+            bookWithAuthorsList = dbController.getBooksWithAuthors(data.getString("character"));
+        }
         recyclerView.setAdapter(new BookList(getContext(), bookWithAuthorsList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;
