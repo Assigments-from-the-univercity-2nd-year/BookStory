@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavController;
@@ -41,6 +42,7 @@ public class BookDescriptionFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_book_description, container, false);
         setHasOptionsMenu(true);
         setOnBackPressed();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Описание книги");
         return root;
     }
 

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -63,6 +64,11 @@ public class AddOrChangeBookFragment extends Fragment
         args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         setHasOptionsMenu(true);
         setOnBackPressed();
+        if (args.getBook() == null) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Добавить книгу");
+        } else {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Изменить информацию");
+        }
         return root;
     }
 

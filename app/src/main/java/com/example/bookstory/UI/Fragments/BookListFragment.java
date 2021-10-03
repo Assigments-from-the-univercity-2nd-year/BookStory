@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -49,6 +50,12 @@ public class BookListFragment extends Fragment
         setHasOptionsMenu(true);
         args = BookListFragmentArgs.fromBundle(getArguments());
         setOnBackPressed();
+        if (args.getCharacter() == null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.app_name);
+        } else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(
+                    "Все книги с " + args.getCharacter().characterName);
+        }
 
         recyclerView = root.findViewById(R.id.recyclerView_bookList);
         FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
