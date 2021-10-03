@@ -12,6 +12,7 @@ import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookAuthorCrossRef
 import com.example.bookstory.DAO.relations.BookAuthorCrossRef.BookWithAuthors;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookCharacterCrossRef;
 import com.example.bookstory.DAO.relations.BookCharacterCrossRef.BookWithCharacters;
+import com.example.bookstory.DAO.relations.BookCharacterCrossRef.TypeOfParticipation;
 
 import java.util.List;
 
@@ -91,10 +92,21 @@ public interface DomainDAO {
     List<BookWithAuthors> getBooksWithAuthors();
 
     @Transaction
+    @Query("SELECT * FROM book WHERE bookId IN " +
+            "(SELECT bookId FROM bookcharactercrossref WHERE characterName = :characterName)")
+    List<BookWithAuthors> getBooksWithAuthors(String characterName);
+
+    @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
     BookWithAuthors getBookWithAuthor(long bookId);
 
     @Transaction
     @Query("SELECT * FROM book WHERE bookId = :bookId")
     BookWithCharacters getBookWithCharacter(long bookId);
+
+    @Transaction
+    @Query("SELECT typeOfParticipation " +
+           "FROM bookcharactercrossref " +
+           "WHERE bookId = :bookId AND characterName = :characterName")
+    TypeOfParticipation getTypeOfParticipationCharacterInBook(long bookId, String characterName);
 }

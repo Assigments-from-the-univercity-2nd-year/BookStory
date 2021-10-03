@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,16 +40,21 @@ public class BookDescriptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_description, container, false);
         setHasOptionsMenu(true);
+        setOnBackPressed();
+        return root;
+    }
+
+
+    private void setOnBackPressed() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 NavController navController = Navigation.findNavController(root);
-                navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
+                navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());
             }
         };
 
         requireActivity().getOnBackPressedDispatcher().addCallback(callback);
-        return root;
     }
 
     @Override
@@ -77,7 +83,7 @@ public class BookDescriptionFragment extends Fragment {
         bookYearOfPublication.setText(String.valueOf(args.getBook().yearOfPublication));
         bookNumberOfPages.setText(String.valueOf(args.getBook().numberOfPages));
 
-        recyclerView.setAdapter(new CharacterList(getContext(), characters));
+        recyclerView.setAdapter(new CharacterList(getContext(), characters, args.getBook()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         if (!characters.isEmpty()) {
             noCharactersTextView.setVisibility(View.GONE);
@@ -103,7 +109,7 @@ public class BookDescriptionFragment extends Fragment {
             case R.id.itemMenu_editMenu_edit:
                 NavController navController = Navigation.findNavController(root);
                 BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToAddOrChangeBookFragment2 action =
-                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToAddOrChangeBookFragment2(args.getBook());
+                        BookDescriptionFragmentDirections.actionBookDescriptionFragmentToAddOrChangeBookFragment2().setBook(args.getBook());
                 navController.navigate(action);
                 return true;
             default:

@@ -16,6 +16,16 @@
         <action
             android:id="@+id/action_bookListFragment_to_bookDescriptionFragment"
             app:destination="@id/bookDescriptionFragment" />
+        <argument
+            android:name="character"
+            app:argType="com.example.bookstory.DAO.Character"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="bookForPopUp"
+            app:argType="com.example.bookstory.DAO.Book"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/addOrChangeBookFragment"
@@ -25,11 +35,17 @@
         <argument
             android:name="book"
             app:argType="com.example.bookstory.DAO.Book"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_addOrChangeBookFragment_to_bookDescriptionFragment"
             app:destination="@id/bookDescriptionFragment"
             app:popUpTo="@id/bookDescriptionFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addOrChangeBookFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment"
+            app:popUpTo="@id/bookListFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -48,5 +64,8 @@
             app:destination="@id/bookListFragment"
             app:popUpTo="@id/bookListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_bookDescriptionFragment_to_bookListFragment2"
+            app:destination="@id/bookListFragment" />
     </fragment>
 </navigation>
