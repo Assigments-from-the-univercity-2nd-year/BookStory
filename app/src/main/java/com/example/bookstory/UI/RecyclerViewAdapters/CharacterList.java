@@ -12,8 +12,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookstory.DAO.Book;
 import com.example.bookstory.DAO.Character;
 import com.example.bookstory.R;
+import com.example.bookstory.UI.Fragments.BookDescriptionFragmentArgs;
 import com.example.bookstory.UI.Fragments.BookDescriptionFragmentDirections;
 
 import java.util.List;
@@ -22,10 +24,12 @@ public class CharacterList extends RecyclerView.Adapter<CharacterList.CharacterL
 
     Context context;
     List<Character> characters;
+    Book book;
 
-    public CharacterList(Context context, List<Character> characters) {
+    public CharacterList(Context context, List<Character> characters, Book book) {
         this.context = context;
         this.characters = characters;
+        this.book = book;
     }
 
     @NonNull
@@ -69,7 +73,9 @@ public class CharacterList extends RecyclerView.Adapter<CharacterList.CharacterL
                             data
                     );*/
                     BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToBookListFragment2 action =
-                            BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment2().setCharacter(character);
+                            BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment2()
+                                    .setCharacter(character)
+                            .setBookForPopUp(book);
                     Navigation.findNavController(v).navigate(action);
                 }
             });

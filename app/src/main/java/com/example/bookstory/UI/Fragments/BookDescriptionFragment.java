@@ -49,7 +49,7 @@ public class BookDescriptionFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.textView_bookDescription_author);
+                NavController navController = Navigation.findNavController(root);
                 navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());
             }
         };
@@ -83,7 +83,7 @@ public class BookDescriptionFragment extends Fragment {
         bookYearOfPublication.setText(String.valueOf(args.getBook().yearOfPublication));
         bookNumberOfPages.setText(String.valueOf(args.getBook().numberOfPages));
 
-        recyclerView.setAdapter(new CharacterList(getContext(), characters));
+        recyclerView.setAdapter(new CharacterList(getContext(), characters, args.getBook()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         if (!characters.isEmpty()) {
             noCharactersTextView.setVisibility(View.GONE);

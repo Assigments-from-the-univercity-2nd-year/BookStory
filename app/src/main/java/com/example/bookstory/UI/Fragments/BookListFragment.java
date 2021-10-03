@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -37,13 +38,17 @@ public class BookListFragment extends Fragment
     List<BookWithAuthors> bookWithAuthorsList;
     RecyclerView recyclerView;
     Sortable currentAlgorithm = new DefaultSort();
+    BookListFragmentArgs args;
+    View root;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_book_list, container, false);
+        root = inflater.inflate(R.layout.fragment_book_list, container, false);
         setHasOptionsMenu(true);
-        BookListFragmentArgs args = BookListFragmentArgs.fromBundle(getArguments());
+        args = BookListFragmentArgs.fromBundle(getArguments());
+        setOnBackPressed();
 
         recyclerView = root.findViewById(R.id.recyclerView_bookList);
         FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
@@ -63,6 +68,21 @@ public class BookListFragment extends Fragment
         recyclerView.setAdapter(new BookList(getContext(), bookWithAuthorsList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;
+    }
+
+    private void setOnBackPressed() {
+        if (args.getCharacter() != null) {
+            OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    NavController navController = Navigation.findNavController(root);
+                    navController.navigate(BookListFragmentDirections
+                            .actionBookListFragmentToBookDescriptionFragment(args.getBookForPopUp())
+                    );
+                }
+            };
+            requireActivity().getOnBackPressedDispatcher().addCallback(callback);
+        }
     }
 
     @Override
