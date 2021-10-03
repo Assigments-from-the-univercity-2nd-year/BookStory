@@ -73,6 +73,10 @@ public class AlgoPreferencesDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * public interface tha allows the communication between
+     * this fragment and parent fragment for this fragment
+     */
     public interface AlgoPreferencesDialogListener {
         void applyAlgoPreferences(Sortable sortable);
     }

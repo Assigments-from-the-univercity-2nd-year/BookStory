@@ -42,6 +42,9 @@ public class CharacterParticipationDialogFragment extends DialogFragment {
                 }).create();
     }
 
+    /**
+     * This method initialises all XML declared views
+     */
     private void init() {
         radioGroup = new RadioGroup(getContext());
 
@@ -68,6 +71,10 @@ public class CharacterParticipationDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * public interface tha allows the communication between
+     * this fragment and parent fragment for this fragment
+     */
     public interface CharacterParticipationDialogListener {
         void applyCharacterParticipation(TypeOfParticipation typeOfParticipation);
     }

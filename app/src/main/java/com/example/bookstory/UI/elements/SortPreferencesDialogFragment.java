@@ -50,6 +50,10 @@ public class SortPreferencesDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * public interface tha allows the communication between
+     * this fragment and parent fragment for this fragment
+     */
     public interface SortPreferencesDialogListener {
         void applySortPreferences(int argId, int sortById, boolean isInclude);
     }

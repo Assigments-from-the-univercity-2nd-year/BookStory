@@ -72,6 +72,10 @@ public class AddOrChangeBookFragment extends Fragment
         return root;
     }
 
+    /**
+     * This method is used for setting the behaviour when the user press
+     * back button
+     */
     private void setOnBackPressed() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -162,8 +166,8 @@ public class AddOrChangeBookFragment extends Fragment
      * Check whether there is a Author with such name in a CustomChipGroup
      *
      * @param authorName name of an Author
-     * @param customChipGroup
-     * @return
+     * @param customChipGroup ChipGroup in which we checking author's presence
+     * @return true, if there is such author in this ChipGroup; otherwise false
      */
     private boolean isAuthorInChipGroup(String authorName, @NonNull CustomChipGroup customChipGroup) {
         for (CustomChip customChip : customChipGroup.getChips()) {
@@ -178,7 +182,7 @@ public class AddOrChangeBookFragment extends Fragment
      * Initialize an AutoCompleteTextView
      *
      * @param selectionActv AutoCompleteTextView that is wanted to be init
-     * @param listItems
+     * @param listItems list of available choises
      */
     private void initSelectionActv(@NonNull AutoCompleteTextView selectionActv, List<String> listItems) {
         selectionActv.setAdapter(new ArrayAdapter<String>(
@@ -186,8 +190,15 @@ public class AddOrChangeBookFragment extends Fragment
         ));
     }
 
-    private void setOnItemClickListenerForSelectionActv(AutoCompleteTextView selectionActv,
-                                                        CustomChipGroup selectionCg) {
+    /**
+     * This method make the synchronization between AutoCompleteTextView and CustomChipGroup:<br/>
+     * when user select an item in AutoCompleteTextView, the CustomChipGroup add this item inside
+     *
+     * @param selectionActv
+     * @param selectionCg
+     */
+    private void setOnItemClickListenerForSelectionActv(@NonNull AutoCompleteTextView selectionActv,
+                                                        @NonNull CustomChipGroup selectionCg) {
         selectionActv.setOnItemClickListener((parent, view, position, id) -> {
             TextView tv = view.findViewById(android.R.id.text1);
             String stringAuthorName = tv.getText().toString();
@@ -239,6 +250,10 @@ public class AddOrChangeBookFragment extends Fragment
         stringNewCharacterName = null;*/
     }
 
+    /**
+     * This method fill the editText fields and add Chips to ChipGroups with
+     * Book data that can be eddied by user
+     */
     private void initBookData() {
         bookNameEt.setText(args.getBook().bookName);
         bookNumberOfPagesEt.setText(String.valueOf(args.getBook().numberOfPages));
@@ -255,6 +270,9 @@ public class AddOrChangeBookFragment extends Fragment
         }
     }
 
+    /**
+     * this method save the changes of the user or add a new book to DB
+     */
     private void applyChanges() {
         List<Author> newAuthors = getAuthors();
         List<Pair<Character, TypeOfParticipation>> newCharacters = getCharacters();

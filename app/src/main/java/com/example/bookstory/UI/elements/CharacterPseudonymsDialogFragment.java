@@ -44,6 +44,10 @@ public class CharacterPseudonymsDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * public interface tha allows the communication between
+     * this fragment and parent fragment for this fragment
+     */
     public interface CharacterPseudonymsDialogListener {
         void applyCharacterPseudonyms(String characterPseudonyms);
     }

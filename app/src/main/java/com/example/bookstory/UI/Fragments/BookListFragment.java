@@ -77,6 +77,10 @@ public class BookListFragment extends Fragment
         return root;
     }
 
+    /**
+     * This method is used for setting the behaviour when the user press
+     * back button
+     */
     private void setOnBackPressed() {
         if (args.getCharacter() != null) {
             OnBackPressedCallback callback = new OnBackPressedCallback(true) {

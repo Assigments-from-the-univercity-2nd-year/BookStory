@@ -23,6 +23,13 @@ public class BookList extends RecyclerView.Adapter<BookList.BookRowHolder> {
     Context context;
     List<BookWithAuthors> BooksWithAuthors;
 
+    /**
+     * Constructor, that needs the current Context and
+     * the List<BookWithAuthors>
+     *
+     * @param context Context
+     * @param books List<BookWithAuthors> of a specific book
+     */
     public BookList(Context context, List<BookWithAuthors> books) {
         this.context = context;
         this.BooksWithAuthors = books;
@@ -46,7 +53,17 @@ public class BookList extends RecyclerView.Adapter<BookList.BookRowHolder> {
         holder.yearOfPublishingTv.setText(String.valueOf(currentBookWithAuthors.book.yearOfPublication));
     }
 
-    String getAuthorsDescriptionOfBook(List<Author> authors) {
+    /**
+     * This method convert the author list to a String according
+     * to such rules:<br/>
+     * if there is no authors, return the "Author is not specified"<br/>
+     * if there are at least one author, return a name of each author
+     * by "enter" reparation
+     *
+     * @param authors authors of a book
+     * @return
+     */
+    String getAuthorsDescriptionOfBook(@NonNull List<Author> authors) {
         StringBuilder sb = new StringBuilder();
         if (authors.isEmpty()) {
             sb.append("Автор не указан");

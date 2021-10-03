@@ -46,7 +46,10 @@ public class BookDescriptionFragment extends Fragment {
         return root;
     }
 
-
+    /**
+     * This method is used for setting the behaviour when the user press
+     * back button
+     */
     private void setOnBackPressed() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -92,6 +95,18 @@ public class BookDescriptionFragment extends Fragment {
         }
     }
 
+    /**
+     * This method convert the author list to a String according
+     * to such rules:<br/>
+     * if there is no authors, return the "Author is not specified"<br/>
+     * if there is one author, return a name of this author<br/>
+     * if there are more than one author, return a name of the first
+     * author and a sigh that there are more authors
+     *
+     * @param authors the author list to be converted
+     * @return the string representation
+     */
+    @NonNull
     private String getAuthorsInStringRepresentation(List<Author> authors) {
         StringBuilder sb = new StringBuilder();
         if (authors.isEmpty()) {

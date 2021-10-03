@@ -26,6 +26,14 @@ public class CharacterList extends RecyclerView.Adapter<CharacterList.CharacterL
     List<Character> characters;
     Book book;
 
+    /**
+     * Constructor, that needs the current Context,
+     * the book and the List<Character> of this book
+     *
+     * @param context Context
+     * @param characters List<Character> of a specific book
+     * @param book the book
+     */
     public CharacterList(Context context, List<Character> characters, Book book) {
         this.context = context;
         this.characters = characters;
