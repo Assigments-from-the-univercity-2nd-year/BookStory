@@ -40,16 +40,21 @@ public class BookDescriptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_description, container, false);
         setHasOptionsMenu(true);
+        setOnBackPressed();
+        return root;
+    }
+
+
+    private void setOnBackPressed() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                NavController navController = Navigation.findNavController(root);
+                NavController navController = Navigation.findNavController(getActivity(), R.id.textView_bookDescription_author);
                 navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());
             }
         };
 
         requireActivity().getOnBackPressedDispatcher().addCallback(callback);
-        return root;
     }
 
     @Override

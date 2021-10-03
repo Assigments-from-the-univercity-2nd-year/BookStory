@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -61,7 +62,22 @@ public class AddOrChangeBookFragment extends Fragment
         root = inflater.inflate(R.layout.fragment_add_or_change_book, container, false);
         args = AddOrChangeBookFragmentArgs.fromBundle(getArguments());
         setHasOptionsMenu(true);
+        setOnBackPressed();
         return root;
+    }
+
+    private void setOnBackPressed() {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                /*NavController navController = Navigation.findNavController(getActivity(), R.id.textView_bookDescription_author);
+                navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());*/
+                NavController navController = Navigation.findNavController(root);
+                navController.navigate(AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookListFragment());
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
     }
 
     @Override
