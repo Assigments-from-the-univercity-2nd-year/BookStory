@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstory.DAO.Character;
 import com.example.bookstory.R;
+import com.example.bookstory.UI.Fragments.BookDescriptionFragmentDirections;
 
 import java.util.List;
 
@@ -61,12 +62,15 @@ public class CharacterList extends RecyclerView.Adapter<CharacterList.CharacterL
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle data = new Bundle();
+                    /*Bundle data = new Bundle();
                     data.putString("character", character.characterName);
                     Navigation.findNavController(v).navigate(
                             R.id.action_bookDescriptionFragment_to_bookListFragment,
                             data
-                    );
+                    );*/
+                    BookDescriptionFragmentDirections.ActionBookDescriptionFragmentToBookListFragment2 action =
+                            BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment2().setCharacter(character);
+                    Navigation.findNavController(v).navigate(action);
                 }
             });
         }

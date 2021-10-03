@@ -43,7 +43,7 @@ public class BookListFragment extends Fragment
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
         setHasOptionsMenu(true);
-        Bundle data = getArguments();
+        BookListFragmentArgs args = BookListFragmentArgs.fromBundle(getArguments());
 
         recyclerView = root.findViewById(R.id.recyclerView_bookList);
         FloatingActionButton floatingActionButton = root.findViewById(R.id.floatingActionButton_bookList);
@@ -55,10 +55,10 @@ public class BookListFragment extends Fragment
         });
 
         DBController dbController = new DBController(getContext());
-        if (data == null) {
+        if (args.getCharacter() == null) {
             bookWithAuthorsList = dbController.getBooksWithAuthors();
         } else {
-            bookWithAuthorsList = dbController.getBooksWithAuthors(data.getString("character"));
+            bookWithAuthorsList = dbController.getBooksWithAuthors(args.getCharacter().characterName);
         }
         recyclerView.setAdapter(new BookList(getContext(), bookWithAuthorsList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

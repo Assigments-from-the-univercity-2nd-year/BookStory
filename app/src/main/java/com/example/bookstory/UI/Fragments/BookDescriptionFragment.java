@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +44,7 @@ public class BookDescriptionFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 NavController navController = Navigation.findNavController(root);
-                navController.navigate(new ActionOnlyNavDirections(R.id.action_bookDescriptionFragment_to_bookListFragment));
+                navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());
             }
         };
 
