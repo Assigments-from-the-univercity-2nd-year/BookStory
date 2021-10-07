@@ -109,7 +109,7 @@ public class BookListFragment extends Fragment
                 sortDialogFragment.show(getChildFragmentManager(), SortPreferencesDialogFragment.TAG);
                 return true;
             case R.id.menuItem_sortMenu_algoPref:
-                AlgoPreferencesDialogFragment algoDialogFragment = new AlgoPreferencesDialogFragment();
+                AlgoPreferencesDialogFragment algoDialogFragment = new AlgoPreferencesDialogFragment(currentAlgorithm);
                 algoDialogFragment.show(getChildFragmentManager(), AlgoPreferencesDialogFragment.TAG);
                 return true;
             default:

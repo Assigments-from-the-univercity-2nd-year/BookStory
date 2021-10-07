@@ -19,7 +19,8 @@ import com.example.bookstory.R;
 public class SortPreferencesDialogFragment extends DialogFragment {
 
     public static String TAG = "SortPreferencesDialogHost";
-    SortPreferencesDialogListener dialogListener;
+    private SortPreferencesDialogListener dialogListener;
+    //private dafaultselection
 
     @NonNull
     @Override
