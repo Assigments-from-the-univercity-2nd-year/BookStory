@@ -25,7 +25,12 @@ import java.util.Map;
 public class AlgoPreferencesDialogFragment extends DialogFragment {
 
     public static String TAG = "SortPreferencesDialogHost";
-    AlgoPreferencesDialogFragment.AlgoPreferencesDialogListener dialogListener;
+    private AlgoPreferencesDialogFragment.AlgoPreferencesDialogListener dialogListener;
+    private Sortable defaultAlgo;
+
+    public AlgoPreferencesDialogFragment(Sortable defaultAlgo) {
+        this.defaultAlgo = defaultAlgo;
+    }
 
     @NonNull
     @Override
@@ -47,6 +52,9 @@ public class AlgoPreferencesDialogFragment extends DialogFragment {
             RadioButton radioButton = new RadioButton(getContext());
             radioButton.setText(sortableList.get(i).getClass().getSimpleName());
             radioGroup.addView(radioButton, i);
+            if (defaultAlgo.getClass().equals(sortableList.get(i).getClass()) || i == 0) {
+                radioGroup.check(radioButton.getId());
+            }
             map.put(radioButton.getId(), sortableList.get(i));
         }
         return new AlertDialog.Builder(getContext())
@@ -56,7 +64,7 @@ public class AlgoPreferencesDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialogListener.applyAlgoPreferences(
-                                        map.get(radioGroup.getCheckedRadioButtonId())
+                                map.get(radioGroup.getCheckedRadioButtonId())
                         );
                     }
                 }).create();
@@ -68,7 +76,7 @@ public class AlgoPreferencesDialogFragment extends DialogFragment {
 
         try {
             dialogListener = (AlgoPreferencesDialogFragment.AlgoPreferencesDialogListener) getParentFragment();
-        }catch (ClassCastException e) {
+        } catch (ClassCastException e) {
             e.printStackTrace();
         }
     }
