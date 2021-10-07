@@ -36,12 +36,15 @@ public class BookListFragment extends Fragment
         implements SortPreferencesDialogFragment.SortPreferencesDialogListener,
         AlgoPreferencesDialogFragment.AlgoPreferencesDialogListener {
 
-    List<BookWithAuthors> bookWithAuthorsList;
-    RecyclerView recyclerView;
-    Sortable currentAlgorithm = new DefaultSort();
-    BookListFragmentArgs args;
-    View root;
+    private List<BookWithAuthors> bookWithAuthorsList;
+    private RecyclerView recyclerView;
+    private Sortable currentAlgorithm = new DefaultSort();
+    private BookListFragmentArgs args;
+    private View root;
 
+    private Criterion criterion = Criterion.NAME_OF_TITLE;
+    private Order order = Order.ASCENDING_ORDER;
+    private boolean isInclude = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,7 +108,7 @@ public class BookListFragment extends Fragment
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuItem_sortMenu_sortBy:
-                SortPreferencesDialogFragment sortDialogFragment = new SortPreferencesDialogFragment();
+                SortPreferencesDialogFragment sortDialogFragment = new SortPreferencesDialogFragment(criterion, order, isInclude);
                 sortDialogFragment.show(getChildFragmentManager(), SortPreferencesDialogFragment.TAG);
                 return true;
             case R.id.menuItem_sortMenu_algoPref:
@@ -118,28 +121,10 @@ public class BookListFragment extends Fragment
     }
 
     @Override
-    public void applySortPreferences(int argId, int sortById, boolean isInclude) {
-        Criterion criterion;
-        Order order;
-
-        switch (argId) {
-            case R.id.radioButton_dialogSortPref_yearOfPublication:
-                criterion = Criterion.YEAR_OF_PUBLICATION;
-                break;
-            case R.id.radioButton_dialogSortPref_numberOfPages:
-                criterion = Criterion.NUMBER_OF_PAGES;
-                break;
-            default:
-                criterion = Criterion.NAME_OF_TITLE;
-        }
-
-        switch (sortById) {
-            case R.id.radioButton_dialogSortPref_ASC:
-                order = Order.ASCENDING_ORDER;
-                break;
-            default:
-                order = Order.DESCENDING_ORDER;
-        }
+    public void applySortPreferences(Criterion criterion, Order order, boolean isInclude) {
+        this.isInclude = isInclude;
+        this.criterion = criterion;
+        this.order = order;
 
         SortingController.sort(
                 bookWithAuthorsList,
