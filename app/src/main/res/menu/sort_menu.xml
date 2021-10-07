@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuItem_sortMenu_algoPref"
+        android:icon="@drawable/ic_baseline_functions_24"
+        android:title="algoPref"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menuItem_sortMenu_sortBy"
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:title="sortBy"
+        app:showAsAction="always" >
+
+    </item>
+
+</menu>

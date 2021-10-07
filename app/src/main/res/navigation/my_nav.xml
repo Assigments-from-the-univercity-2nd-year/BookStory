@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/bookListFragment">
+
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="com.example.bookstory.UI.Fragments.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list">
+        <action
+            android:id="@+id/action_bookListFragment_to_addBookFragment"
+            app:destination="@id/addOrChangeBookFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_bookDescriptionFragment"
+            app:destination="@id/bookDescriptionFragment" />
+        <argument
+            android:name="character"
+            app:argType="com.example.bookstory.DAO.Character"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="bookForPopUp"
+            app:argType="com.example.bookstory.DAO.Book"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrChangeBookFragment"
+        android:name="com.example.bookstory.UI.Fragments.AddOrChangeBookFragment"
+        android:label="fragment_add_book"
+        tools:layout="@layout/fragment_add_or_change_book" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookstory.DAO.Book"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_addOrChangeBookFragment_to_bookDescriptionFragment"
+            app:destination="@id/bookDescriptionFragment"
+            app:popUpTo="@id/bookDescriptionFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addOrChangeBookFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment"
+            app:popUpTo="@id/bookListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookDescriptionFragment"
+        android:name="com.example.bookstory.UI.Fragments.BookDescriptionFragment"
+        android:label="fragment_book_description"
+        tools:layout="@layout/fragment_book_description" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookstory.DAO.Book" />
+        <action
+            android:id="@+id/action_bookDescriptionFragment_to_addOrChangeBookFragment2"
+            app:destination="@id/addOrChangeBookFragment" />
+        <action
+            android:id="@+id/action_bookDescriptionFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment"
+            app:popUpTo="@id/bookListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_bookDescriptionFragment_to_bookListFragment2"
+            app:destination="@id/bookListFragment" />
+    </fragment>
+</navigation>
