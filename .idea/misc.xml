@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Mark/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/activity_main.xml" value="0.1640625" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/author_row.xml" value="0.3" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/book_row.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/character_row.xml" value="0.5" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/dialog_algo_preferences.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/dialog_sort_preferences.xml" value="0.3" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_add_author.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_add_book.xml" value="0.5" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_add_character.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_add_or_change_book.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_book_description.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_book_list.xml" value="0.22" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/fragment_related_books_to_character.xml" value="0.3046875" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/layout/switch_item.xml" value="0.3" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/menu/apply_menu.xml" value="0.3" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/menu/edit_menu.xml" value="0.3" />
+        <entry key="..\:/Users/Mark/Documents/Univercity/2nd year/1 semestr/OOP/1 Laba/BookStory/app/src/main/res/menu/sort_menu.xml" value="0.3" />
+      </map>
+    </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="androidx.room.Query" />
+    </list>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
