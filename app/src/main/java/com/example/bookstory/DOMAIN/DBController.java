@@ -102,6 +102,16 @@ public class DBController {
         return characterNames;
     }
 
+    public List<String> getCharacterNamesAndPseudonyms() {
+        List<String> characterNamesAndPseudonyms = new ArrayList<>();
+        for (Character character : getCharacters()) {
+            characterNamesAndPseudonyms.add(character.characterName);
+            if (!character.pseudonyms.trim().equals(""))
+            characterNamesAndPseudonyms.add(character.pseudonyms);
+        }
+        return characterNamesAndPseudonyms;
+    }
+
     public List<BookWithAuthors> getBooksWithAuthors() {
         return domainDAO.getBooksWithAuthors();
     }

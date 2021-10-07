@@ -122,7 +122,7 @@ public class AddOrChangeBookFragment extends Fragment
             return false;
         });
 
-        initSelectionActv(characterSelectionActv, dbController.getCharacterNames());
+        initSelectionActv(characterSelectionActv, dbController.getCharacterNamesAndPseudonyms());
         setOnItemClickListenerForSelectionActv(characterSelectionActv, characterSelectionCg);
         characterSelectionActv.setOnEditorActionListener((v, actionId, event) -> {
             stringNewCharacterName = v.getText().toString();
