@@ -83,7 +83,11 @@ public class AddOrChangeBookFragment extends Fragment
                 /*NavController navController = Navigation.findNavController(getActivity(), R.id.textView_bookDescription_author);
                 navController.navigate(BookDescriptionFragmentDirections.actionBookDescriptionFragmentToBookListFragment());*/
                 NavController navController = Navigation.findNavController(root);
-                navController.navigate(AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookListFragment());
+                if (args.getBook() == null) {
+                    navController.navigate(AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookListFragment());
+                } else {
+                    navController.navigate(AddOrChangeBookFragmentDirections.actionAddOrChangeBookFragmentToBookDescriptionFragment(args.getBook()));
+                }
             }
         };
 
